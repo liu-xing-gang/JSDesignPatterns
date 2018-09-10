@@ -20,10 +20,10 @@
                             <router-link to="">Laravel</router-link>
                         </li>
                         <li><router-link to="">Python</router-link></li>
-                        <li><router-link to="">JavaScript设计模式</router-link></li>
+                        <li><router-link to="/jspattern">JavaScript设计模式</router-link></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right ">
-                        <li><a href="/about/" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">关于</a></li>
+                        <li><a href="" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">关于</a></li>
                     </ul>
                 </div>
             </div>

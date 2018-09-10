@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>线性表</title>
+</head>
+
+<body>
+    <section>
+        <h6>插入元素</h6>
+        <input type="text" id="name" placeholder="姓名">
+        <select name="" id="sex">
+            <option value="male">男</option>
+            <option value="female">女</option>
+        </select>
+        <input type="text" placeholder="索引从0开始" id="index">
+        <input type="button" value="插入" id="insert">
+        <input type="button" value="获取" id="get">
+        <input type="button" value="删除" id="del">
+        <div id="result"></div>
+    </section>
+
+    <script>
+        var sqList = [],
+            insert = document.getElementById('insert'),
+            result = document.getElementById('result'),
+            getBtn = document.getElementById('get'),
+            delBtn = document.getElementById('del')
+
+        function insertItem(name, sex, i) {
+            var obj = {}
+            obj.name = name
+            obj.sex = sex
+            if (i < 0 || i > sqList.length)
+                return
+            else {
+                for (var j = sqList.length - 1; j >= i; j--) {
+                    sqList[j] = sqList[j]
+                }
+                sqList[i] = obj
+                result.innerHTML += "<br>从索引" + i + "处插入一个元素<br/>" + JSON.stringify(sqList)
+            }
+        }
+
+        function getItem(index) {
+            if (index < 0 || index > sqList.length) return
+            for (var k = 0; k < sqList.length; k++) {
+                if (k == index) {
+                    result.innerHTML += "<br>获取索引为" + index + "的元素" + "<br>" + JSON.stringify(sqList[k]);
+                    break
+                }
+
+            }
+        }
+
+        function deleteItem(index) {
+            var delObj = sqList[index]
+            if (index < 0 || index > sqList.length)
+                return
+            else {
+                for (var i = index; i < sqList.length - 1; k++) {
+                    sqList[i] = sqList[i + 1]
+                }
+            }
+            sqList.length--
+                result.innerHTML += "<br>删除的元素:<br>" + JSON.stringify(delObj) + "<br>被删除后的顺序表:<br>" + JSON.stringify(sqList)
+        }
+
+        //插入调用
+        insert.onclick = function() {
+            var name = document.getElementById("name").value,
+                selectIndex = document.getElementById("sex").selectedIndex,
+                male = document.getElementById("sex").options[selectIndex].value,
+                index = document.getElementById("index").value;
+            insertItem(name, male, index);
+        };
+        //获取调用
+        getBtn.onclick = function() {
+            var index = document.getElementById("index").value;
+            getItem(index);
+        };
+        //删除调用
+        delBtn.onclick = function() {
+            var index = parseInt(document.getElementById("index").value);
+            deleteItem(index);
+        };
+    </script>
+</body>
+
+</html>

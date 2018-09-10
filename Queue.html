@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var Queue = function () {
+            this.items = []
+
+            // 初始化队列
+            if(typeof Queue.prototype.push !='function'){
+
+                // 入队
+                Queue.prototype.enqueue = function () {
+                    var len = arguments.length
+                    if(len === 0) 
+                        return
+                    for(var i = 0; i < len; i ++)
+                        this.items.push(arguments[i])
+                }
+
+                // 出队
+                Queue.prototype.dequeue = function () {
+                    var result = this.items.shift()
+                    return typeof result != undefined ? result : false
+                }
+
+                Queue.prototype.front = function () {
+                    return this.items[0]
+                }
+
+                Queue.prototype.rear = function () {
+                    return this.items[items.length - 1]
+                }
+
+                Queue.prototype.size = function () {
+                    return this.items.length
+                }
+
+                Queue.prototype.clear = function () {
+                    return this.items.splice(0, this.items.length)
+                }
+            }
+        }
+
+        var queue = new Queue()
+        queue.enqueue('1', '2', '3', '5', '8')
+        console.log(queue)
+        queue.dequeue()
+        queue.dequeue()
+        console.log(queue)
+        queue.clear()
+        console.log(queue)
+    </script>
+</body>
+</html>

@@ -80,7 +80,7 @@
                 return backs
             }
 
-            // 前序遍历
+            // 后序遍历
             postOrder() {
                 let backs = []
                 const postOrderNode = (node, callback) => {
@@ -132,7 +132,7 @@
                         if (node.left !== null && node.right !== null) {
                             let _node = this.getMin(node.right);
                             node.data = _node.data;
-                            node.right = removeNode(node.right, data);
+                            node.right = removeNode(node.right, data); //~~~~~~~~~~~
                             return node
                         }
                     } else if (data < node.data) {
@@ -164,8 +164,8 @@
         tree.insert(20);
         tree.insert(18);
         tree.insert(25);
-        console.log(tree);
-        console.log(tree.root);
+        // console.log(tree);
+        // console.log(tree.root);
         // //中序遍历BST
         // console.log(tree.inOrder());
         // //前序遍历BST

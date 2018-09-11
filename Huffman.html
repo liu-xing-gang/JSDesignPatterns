@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var HuffmanTree = window.HuffmanTree || {}
+        HuffmanTree = {
+            // 计算字符出现频率
+            frequencies(s) {
+                var hash = {}
+                for (var i = 0; i < s.length; i++) {
+                    var c = s.charAt(i)
+                    hash[c] != undefined ? hash[c]++ : hash[c] = 1
+                }
+                return Object.keys(hash).map(function(e) {
+                    return [e, hash[e]]
+                })
+            },
+
+            // 交换数组元素
+            swap(array, i, j) {
+                var temp = array[i]
+                array[i] = array[j]
+                array[j] = temp
+            },
+
+            // 冒两次泡，取出权重最小的2个元素
+            bubbleTwice(array) {
+                for (var i = 0; i < 2; i++)
+                    for (j = 0; j < array.length - i - 1; j++) {
+                        if (array[j][1] < array[j + 1][1]) {
+                            this.swap(array, j, j + 1);
+                        }
+                    }
+            },
+
+            // 创建霍夫曼树
+            createTree(array) {
+                while (array.length > 1) {
+                    this.bubbleTwice(array)
+                    var left = array.pop()
+                    var right = array.pop()
+                    left.code = '0'
+                    right.code = '1'
+
+                    // 生成父节点，权重为2个子节点权重之和
+                    var parent = [null, left[1] + right[1]]
+                    parent.left = left
+                    parent.right = right
+                    array.push(parent)
+                }
+
+                // 返回根节点
+                return array[0]
+            },
+
+            // 深度遍历哈夫曼树，获取字符和哈夫曼编码的映射    
+            getMapping(root) {
+                var map = {}
+                var traverse = function(parent, path) {
+                    if (parent) {
+                        if (parent.left || parent.right) {
+                            if (parent.left)
+                                traverse(parent.left, path + parent.left.code)
+                            if (parent.right)
+                                traverse(parent.right, path + parent.right.code)
+                        } else {
+                            if (path)
+                                map[parent[0]] = path
+                        }
+                    }
+                }
+                traverse(root, '')
+                return map
+            },
+
+            // 编码方法
+            // freqs:字符出现映射对象
+            // s:待编码的字符串
+            encode(freqs, s) {
+                var root = this.createTree(freqs)
+                if (root && (root.left || root.right) && !s)
+                    return ''
+                if (!s)
+                    return null
+                var map = this.getMapping(root)
+                var res = ''
+                for (var i = 0; i < s.length; i++) {
+                    if (map[s.charAt(i)]) {
+                        res += map[s.charAt(i)]
+                    } else {
+                        return null
+                    }
+                }
+                return res
+            },
+
+            // 解码方法
+            decode(freqs, s) {
+                var root = this.createTree(freqs)
+                if (root && (root.left || root.right) && !s) {
+                    return ""
+                }
+                if (!s)
+                    return null
+                var map = this.getMapping(root)
+                var res = ''
+
+                sign:
+                    while (s) {
+                        for (var i in map) {
+                            var index = s.indexOf(map[i])
+                            if (index === 0) {
+                                res += i
+                                s = s.slice(map[i].length)
+                                continue sign
+                            }
+                        }
+                        return null
+                    }
+                return res
+            }
+        }
+
+
+        //Test1
+        var str = "abcdcba";
+        var fq = HuffmanTree.frequencies(str);
+        console.log('fq:', JSON.stringify(fq))
+        //[["a",4],["b",1],["c",2]]
+        var encodeStr = HuffmanTree.encode(fq,str)
+        console.log('encode:', encodeStr)
+        var decodeStr = HuffmanTree.decode(fq,encodeStr)
+        console.log('decode:', decodeStr)
+    </script>
+</body>
+
+</html>

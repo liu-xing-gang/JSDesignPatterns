@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 判断回文
+        function back(str){
+            return str === str.split('').reverse().join('')
+        }
+
+        // Number数组中去重
+        function unique(arr){
+            var hash = {}
+            var data = []
+            for(var i = 0; i < arr.length; i ++){
+                if(!hash[arr[i]]){
+                    hash[arr[i]] = true
+                    data.push(arr[i])
+                }
+            }
+            return data;
+        }
+
+        // 统计字符串中出现的次数
+        function frequency(str){
+            var hash = {}
+            for(var i=0; i<str.length; i++ ){
+                var c= str.charAt(i)
+                hash[c] !=undefined ? hash[c] ++ : hash[c] = 1
+            }
+            return Object.keys(hash).map(function(e){
+                return [e, hash[e]]
+            })
+        }
+
+        // 冒泡排序 asc(<) resc(>)
+        function bubbleSort(arr){
+            for(var i = 0; i < arr.length; i ++){
+                for(var j = 0; j < arr.length; j ++){
+                    if(arr[i] < arr[j]){
+                        var temp = arr[i]
+                        arr[i] = arr[j]
+                        arr[j] = temp
+                    }
+                }
+            }
+            return arr
+        }
+
+        // 快速排序
+        function quick(arr){
+            if(arr.length<=1){
+                return arr
+            }
+            var leftArr = []
+            var rightArr = []
+            var q=arr[0]
+            for(var i = 1; i < arr.length; i ++){
+                arr[i] > q ? rightArr.push(arr[i]) : leftArr.push(arr[i])
+            }
+            return [].concat(quick(leftArr), [q], quick(rightArr))
+        }
+
+
+    </script>
+</body>
+</html>

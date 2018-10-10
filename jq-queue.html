@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+    background:#aaa;
+    width:18px;
+    height:18px;
+    position:absolute;
+    top:10px;
+}
+
+    </style>
+</head>
+<body>
+    <div id="block1"></div>
+    <div id="block2"></div>
+    <script src="jquery-1.10.2.min.js"></script>
+    <script>
+        var FUNC=[
+            function() {$("#block1").animate({left:"+=100"},aniCB);},
+            function() {$("#block2").animate({left:"+=100"},aniCB);$("#block1").css('width', '36px')},
+            function() {$("#block1").animate({left:"+=100"},aniCB);},
+            function() {$("#block2").animate({left:"+=100"},aniCB);$("#block1").css('background', 'red')},
+            function() {$("#block1").animate({left:"+=100"},aniCB);},
+            function(){alert("动画结束")}
+        ];
+        var aniCB=function() {
+            $(document).dequeue("myAnimation");
+        }
+        $(document).queue("myAnimation",FUNC);
+        // 出队执行
+        aniCB();
+
+        // //清空队列
+        // $(document).queue("myAnimation",[]);
+        // //加一个新的函数放在最后
+        // $(document).queue("myAnimation",function(){alert("动画真的结束了！")});
+    </script>
+</body>
+</html>

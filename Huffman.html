@@ -72,6 +72,7 @@
                             if (parent.right)
                                 traverse(parent.right, path + parent.right.code)
                         } else {
+                            // 叶节点
                             if (path)
                                 map[parent[0]] = path
                         }
@@ -129,9 +130,8 @@
             }
         }
 
-
         //Test1
-        var str = "abcdcba";
+        var str = "abcba";
         var fq = HuffmanTree.frequencies(str);
         console.log('fq:', JSON.stringify(fq))
         //[["a",4],["b",1],["c",2]]

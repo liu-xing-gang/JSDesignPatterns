@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+</head>
+
+<body>
+    <button type="button" class="layui-btn" id="test1">
+        <i class="layui-icon">&#xe67c;</i>上传图片
+    </button>
+
+    <script src="../layui/layui.js"></script>
+    <script>
+        layui.config({
+            base: './res/js/modules/' //你存放新模块的目录，注意，不是layui的模块目录
+        })
+
+        layui.use('upload', function () {
+            var upload = layui.upload
+
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '#test1' //绑定元素
+                ,url: '/upload/' //上传接口
+                ,done: function (res) {
+                    //上传完毕回调
+                }
+                ,error: function () {
+                    //请求异常回调
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

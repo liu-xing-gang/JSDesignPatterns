@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="renderer" content="webkit">
+        <title></title>
+    </head>
+    <body>
+        <h1>父页面</h1>
+        <button id="openBtn">打开iframe</button>
+        <div id="h5SourceShow" style="display:none">
+          <iframe id="iframe" src="" width="300" height="400"></iframe>
+        </div>
+    </body>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $(function(){
+      $('#openBtn').click(function(){
+        coursewareH5Close()
+        $('#iframe').attr('src', 'http://www.baidu.com')
+          $('#h5SourceShow').css('display','block')
+      })
+      window.addEventListener('message', function (e) {
+          console.log(e);
+          if (e.data.type == 'coursewareH5Close') {
+              coursewareH5Close();
+          }else{
+
+          }
+      }, false);
+    })
+  function coursewareH5Close(){
+     var iframe = '<iframe id="iframe" src="" width="300" height="400"></iframe>'
+     $('#iframe').remove()
+      $('#h5SourceShow').css('display','none').html(iframe)
+  }
+    </script>
+</html>

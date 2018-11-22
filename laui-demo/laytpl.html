@@ -11,6 +11,8 @@
     <!-- 第一步 编写模板 -->
     <script id="demo" type="text/html">
         <h3>{{ d.title }}</h3>
+        <h3>{{= d.title }}</h3>
+        <h3>{{! d.title !}}</h3>
         <ul>
             {{# layui.each(d.list, function (index, item){ }}
                 <li>
@@ -33,7 +35,7 @@
 
             // 第三步 渲染模板
             var data = {
-                title: 'laytpl',
+                title: '<h2>laytpl</h2>',
                 list: [{"modname":"弹层","alias":"layer","site":"layer.layui.com"},{"modname":"表单","alias":"form"}],
             }
             var getTpl = demo.innerHTML,

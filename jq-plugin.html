@@ -5,8 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        #nav li {
+    list-style: none;
+    float: left;
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #0000FF;
+    border-bottom: none;
+    padding: 5px;
+    margin: 10px;
+    margin-bottom: 0;
+}
+
+#cont div {
+    width: 210px;
+    height: 150px;
+    border: 1px solid #0000FF;
+    margin-left: 10px;
+    clear: both;
+    display: none;
+}
+
+.active {
+    background: #AFEEEE;
+}
+    </style>
 </head>
 <body>
+    <pre>
+        编写插件的两种方式:
+            1.类级别开发插件(1%)
+            2.对象级别开发(99%)
+
+        类级别的静态开发就是给jquery添加静态方法，三种方式
+            1.添加新的全局函数
+            2.使用$.extend(obj)
+            3.使用命名空间
+
+        对象级别插件一
+        /*
+            功能：设置列表中表项获取鼠标焦点时的背景色
+            参数：li_col[可选]鼠标所在表项行的背景色
+            返回：原调用对象
+            示例：$("ul").focusColor("red");
+        */
+        ;(function($){
+            $.fn.extend({
+                "yourPluginName":function(pram_value){
+                //各种默认属性或参数的设置
+                    this.each(function(){
+                        //插件实现的代码
+                    })
+                }
+            })
+        })(jQuery);
+
+        对象级别插件二
+        ;(function ($) {
+            $.fn.plugin=function (options) {
+                var defaults={
+                    //各种参数、各种属性
+                };
+        
+                //options合并到defaults上,defaults继承了options上的各种属性和方法,将所有的赋值给endOptions
+                var endOptions=$.extend(defaults,options);
+                
+                this.each(function () {
+                    //实现功能的代码
+                });
+            };
+        })(jQuery);
+
+
+    </pre>
+    <button class="btn1">类级别调用</button>
+
+    <div id="tab">
+            <ul id="nav">
+                <li class="active">HTML</li>
+                <li>CSS</li>
+                <li>JAVASCRIPT</li>
+            </ul>
+            <div id="cont">
+                <div style="display: block;">HTML</div>
+                <div>CSS</div>
+                <div>JAVASCRIPT</div>
+            </div>
+        </div>
+
+    <script src="jquery-1.10.2.min.js"></script>
+    <script>
+        /**
+         * 类级别
+         */ 
+        // 1.1给jquery 添加全局函数
+        jQuery.myAlert = function (str) {alert(str)}
+
+        // 1.2 extend()
+        $.extend({
+            myAlert2: function (str) {alert(str)}
+        })
+
+        // 1.3 使用命名空间
+        $.lxg = {
+            myAlert: function (str){alert(str)}
+        }
+
+        // 调用
+        $('.btn1').on('click', function () {
+            $.myAlert('1.1')
+            $.myAlert2(1.2)
+            $.lxg.myAlert(1.3)
+        })
+
+        /**
+         * 对象级别插件
+         */ 
+        ;(function ($) {
+            $.fn.tab = function (options) {
+                var defaults = {
+                    tabActiveClass: 'active',
+                    tabNav: '#nav>li',
+                    tabCont: '#cont>div',
+                    tabType: 'click'
+                }
+
+                var endOptions = $.extend(defaults, options)
+                $(this).each(function () {
+                    var _this = $(this)
+                    _this.find(endOptions.tabNav).on(endOptions.tabType, function () {
+                        $(this).addClass(endOptions.tabActiveClass).siblings().removeClass(endOptions.tabActiveClass)
+                        var index = $(this).index()
+                        _this.find(endOptions.tabCont).eq(index).show().siblings().hide()
+                    })
+                })
+
+            }
+        })(jQuery);
     
+
+         $('#tab').tab({tabType: 'mouseover'})
+    </script>
 </body>
 </html>

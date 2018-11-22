@@ -1,60 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        var Queue = function () {
-            this.items = []
+        function LinkedQueue() {
+            var Node = function(ele) {
+                this.ele = ele;
+                this.next = null;
+            }
 
-            // 初始化队列
-            if(typeof Queue.prototype.push !='function'){
+            var length = 0,
+                front, //队首指针
+                rear; //队尾指针
+            this.push = function(ele) {
+                var node = new Node(ele),
+                    temp;
 
-                // 入队
-                Queue.prototype.enqueue = function () {
-                    var len = arguments.length
-                    if(len === 0) 
-                        return
-                    for(var i = 0; i < len; i ++)
-                        this.items.push(arguments[i])
+                if (length == 0) {
+                    front = node;
+                } else {
+                    temp = rear;
+                    temp.next = node;
                 }
+                rear = node;
+                length++;
+                return true;
+            }
 
-                // 出队
-                Queue.prototype.dequeue = function () {
-                    var result = this.items.shift()
-                    return typeof result != undefined ? result : false
-                }
+            this.pop = function() {
+                var temp = front;
+                front = front.next
+                length--;
+                temp.next = null
+                return temp;
+            }
 
-                Queue.prototype.front = function () {
-                    return this.items[0]
+            this.size = function() {
+                return length;
+            }
+            this.getFront = function() {
+                return front;
+            }
+            this.getRear = function() {
+                return rear;
+            }
+            this.toString = function() {
+                var string = '',
+                    temp = front;
+                while (temp) {
+                    string += temp.ele + ' ';
+                    temp = temp.next;
                 }
-
-                Queue.prototype.rear = function () {
-                    return this.items[items.length - 1]
-                }
-
-                Queue.prototype.size = function () {
-                    return this.items.length
-                }
-
-                Queue.prototype.clear = function () {
-                    return this.items.splice(0, this.items.length)
-                }
+                return string;
+            }
+            this.clear = function() {
+                front = null;
+                rear = null;
+                length = 0;
+                return true;
             }
         }
 
-        var queue = new Queue()
-        queue.enqueue('1', '2', '3', '5', '8')
-        console.log(queue)
-        queue.dequeue()
-        queue.dequeue()
-        console.log(queue)
-        queue.clear()
-        console.log(queue)
+        var myQueue = new LinkedQueue();
+
+        myQueue.push(1)
+        myQueue.push(2)
+        myQueue.push(3)
+        myQueue.push(4)
+        console.log(myQueue.toString()) // 1 2 3 4 
+        console.log(myQueue.pop()) // Node { ele: 1, next: null }
+        console.log(myQueue.toString()) // 2 3 4
+
+        function ArrayQueue() {
+            var arr = [];
+            //入队操作  
+            this.push = function(element) {
+                arr.push(element);
+                return true;
+            }
+            //出队操作  
+            this.pop = function() {
+                return arr.shift();
+            }
+            //获取队首  
+            this.getFront = function() {
+                return arr[0];
+            }
+            //获取队尾  
+            this.getRear = function() {
+                return arr[arr.length - 1]
+            }
+            //清空队列  
+            this.clear = function() {
+                arr = [];
+            }
+            //获取队长  
+            this.size = function() {
+                return length;
+            }
+        }
     </script>
 </body>
+
 </html>

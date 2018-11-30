@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="videojs/hls_version/video-js.css" rel="stylesheet">
+    <script src="videojs/hls_version/video.js"></script>
+    <script src="videojs/hls_version/videojs-contrib-hls.js"></script>
+    <script src="jquery-1.10.2.min.js"></script>
+    <style>
+        button{outline: none!important;}
+        .vjs-button > .vjs-icon-placeholder:before {
+            font-size: 1.8em;
+            line-height: 36px;
+        }
+    </style>
+    
+</head>
+
+<body>
+
+    <!-- 
+        ffmpeg 切割h264 aac标准 MP4
+ffmpeg -i oceans.mp4 -map 0 -codec:v libx264 -codec:a aac -f segment -segment_time 10 -segment_format_options movflags=+faststart out%03d.mp4
+ffmpeg -i oceans.mp4 -map 0 -codec:v libx264 -codec:a aac -f ssegment -segment_list playlist.m3u8 out%03d.ts
+
+ffmpeg -re -i in.oceans -map 0 -codec:v libx264 -codec:a aac -f segment -segment_list playlist.m3u8 -segment_list_flags +live -segment_time 10 out%03d.mkv
+
+     -->
+    <video id="my-player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="400" height="300"></video>
+    <script>  
+    
+    function play(response) {
+        var myPlayer = videojs('my-player',{
+            bigPlayButton : true,
+            textTrackDisplay : false,
+            posterImage: false,
+            errorDisplay : false,
+            controlBar : true
+        },function(){
+            console.log(this)
+            this.on('loadedmetadata',function(){
+                console.log('loadedmetadata');
+                //加载到元数据后开始播放视频
+                
+        // this.play();
+            })
+            this.on('ended',function(){
+                console.log('ended')
+            })
+            this.on('firstplay',function(){
+                console.log('firstplay')
+            })
+            this.on('loadstart',function(){
+            //开始加载
+                console.log('loadstart')
+            })
+            this.on('loadeddata',function(){
+                console.log('loadeddata')
+            })
+            this.on('seeking',function(){
+            //正在去拿视频流的路上
+                console.log('seeking')
+            })
+            this.on('seeked',function(){
+            //已经拿到视频流,可以播放
+                console.log('seeked')
+            })
+            this.on('waiting',function(){
+                console.log('waiting')
+            })
+            this.on('pause',function(){
+                console.log('pause')
+            })
+            this.on('play',function(){
+                console.log('play')
+            })
+        }).src({
+                src: response,
+                type: 'application/x-mpegURL',
+                // withCredentials: true
+            });
+    }
+    // play('http://localhost:9001/JSDesignPatterns/m3u8/playlist.m3u8')
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:9001/JSDesignPatterns/clappr.php',
+        success: function (response) {
+            play(response)
+        }
+    })
+    // var videoUrl = 'http://localhost:9001/JSDesignPatterns/clappr.php'
+    // fetch(videoUrl).then(function(response) {}) 
+            
+        
+    </script>
+</body>
+
+</html>

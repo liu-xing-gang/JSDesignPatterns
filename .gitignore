@@ -1,6 +1,9 @@
 .DS_Store
 node_modules
 /dist
+/m3u8
+/oceans
+/haoxing
 
 # local env files
 .env.local
@@ -19,3 +22,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+*.mp4
+*.m3u8
+*.ts

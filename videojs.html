@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="videojs/video-js.css" rel="stylesheet">
+    <script src="videojs/video.js"></script>
+    <script src="videojs/videojs-contrib-hls.js"></script>
+    <script src="videojs/videojs-ie8.min.js"></script>
+    
+</head>
+
+<body>
+    <!-- blob -->
+    <!-- <video id="my-player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" width="400" height="300">
+    </video> -->
+
+    <video id="my_video_2" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="640" height="268"></video>
+    
+    <!-- blob m3u8 -->
+    <!-- <video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="268" 
+  data-setup='{}'>
+    <source src="http://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8" type="application/x-mpegURL">
+  </video> -->
+    <script>
+        /***
+         * blob1
+         */
+        // var videoMp4 = document.querySelector('video');
+        // if (window.MediaSource) {
+        //     var mediaSource = new MediaSource();
+        //     videoMp4.src = URL.createObjectURL(mediaSource);
+        //     mediaSource.addEventListener('sourceopen', sourceOpen);
+        // } else {
+        //     console.log("The Media Source Extensions API is not supported.")
+        // }
+        // function sourceOpen(e) {
+        //     URL.revokeObjectURL(videoMp4.src);
+        //     // 设置 媒体的编码类型
+        //     // var mime = 'video/webm; codecs="vorbis, vp8"';
+        //     // var mime = 'video/mp2t;codecs="avc1.42E01E,mp4a.40.2"'
+        //     var mime = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+        //     var mediaSource = e.target;
+        //     var sourceBuffer = mediaSource.addSourceBuffer(mime);
+        //     var videoUrl = 'http://localhost:9001/JSDesignPatterns/clappr.php'
+        //     fetch(videoUrl)
+        //         .then(function(response) {
+        //             return response.arrayBuffer();
+        //         })
+        //         .then(function(arrayBuffer) {
+        //             sourceBuffer.addEventListener('updateend', function(e) {
+        //                 if (!sourceBuffer.updating && mediaSource.readyState === 'open') {
+        //                     mediaSource.endOfStream();
+        //                     // videoMp4.play().then(function() {}).catch(function(err) {
+        //                     //     console.log('.js-log-mp4', err)
+        //                     // });
+        //                 }
+        //             });
+        //             sourceBuffer.appendBuffer(arrayBuffer);
+        //         });
+        // }
+        // // videojs
+        // var player = videojs('my-player')
+            
+        /**
+         * blob2 
+         */ 
+        var myPlayer = videojs('my_video_2',{
+            bigPlayButton : true,
+            textTrackDisplay : false,
+            posterImage: false,
+            errorDisplay : false,
+            controlBar : true
+        },function(){
+            console.log(this)
+            this.on('loadedmetadata',function(){
+                console.log('loadedmetadata');
+                //加载到元数据后开始播放视频
+                
+        this.play();
+            })
+            this.on('ended',function(){
+                console.log('ended')
+            })
+            this.on('firstplay',function(){
+                console.log('firstplay')
+            })
+            this.on('loadstart',function(){
+            //开始加载
+                console.log('loadstart')
+            })
+            this.on('loadeddata',function(){
+                console.log('loadeddata')
+            })
+            this.on('seeking',function(){
+            //正在去拿视频流的路上
+                console.log('seeking')
+            })
+            this.on('seeked',function(){
+            //已经拿到视频流,可以播放
+                console.log('seeked')
+            })
+            this.on('waiting',function(){
+                console.log('waiting')
+            })
+            this.on('pause',function(){
+                console.log('pause')
+            })
+            this.on('play',function(){
+                console.log('play')
+            })
+        }).src({
+            src: 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8',
+            type: 'application/x-mpegURL',
+            // withCredentials: true
+        });
+    
+    </script>
+</body>
+
+</html>

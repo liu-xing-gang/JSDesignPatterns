@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * 构造函数 
+         */ 
+        function Animal(name, color){
+            this.name = name
+            this.color = color
+
+            this.getName = function () {
+                return this.name
+            }
+        }
+        // var cat = new Animal('猫', '白色')
+        // console.log(cat)
+
+        /**
+         * 工厂模式 
+         */ 
+        function Animal(opts){
+            var obj = new Object
+            obj.name = opts.name
+            obj.color = opts.color
+
+            obj.getInfo = function () {
+                return '名称: '+obj.name+' 颜色: '+obj.color
+            }
+
+            return obj;
+        }
+        var cat = Animal({name: '波斯猫', color: '白色'});
+        console.log(cat.getInfo())
+
+        /**
+         * 模块模式 
+         */ 
+        var Car = (function () {
+            var name = '法拉利',
+                color = 'blue';
+
+            function sayName(){
+                console.log(name)
+            }
+
+            function getColor(name){
+                console.log(name)
+            }
+            
+            return {name: sayName, color: getColor}
+       
+        })();
+
+        console.log(new Car().name())
+
+    </script>
+</body>
+</html>

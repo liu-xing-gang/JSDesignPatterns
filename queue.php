@@ -9,8 +9,8 @@
         return date(preg_replace('`(?<!\\\\)u`', $milliseconds, $format), $timestamp);
     }
     // echo udate('Y-m-d H:i:s u');
-$arr = array([
+$arr = array(
     'key' => $_REQUEST,
     'time' => udate('Y-m-d H:i:s u')
-]);
+);
 echo json_encode($arr);

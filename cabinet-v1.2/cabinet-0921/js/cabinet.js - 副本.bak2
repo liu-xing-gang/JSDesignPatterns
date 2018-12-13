@@ -1,0 +1,287 @@
+;(function ($) {
+            $.fn.extend({
+                "cabinet": function () {
+                    var oThis = this
+                    var currentLayer = {}
+
+                    // 属性
+                    this.properties = {
+                        column: 6,
+                        section: 6,
+                        layer: 6,
+                        capacity: 6,
+                        oParent: new Object,
+                        oSidebar: new Object,
+                        oMain: new Object,
+                        oUl: new Object,
+                        layers: new Object,
+                    }
+
+                    /**
+                     * ===========================
+                     * 私有方法
+                     * ===========================
+                     */
+                    var _initialize = function () {
+                        oThis.properties.oParent = oThis[0]
+                        oThis.create()
+                        oThis.select(0)
+                        _initTab()
+                        flag = a(true)()
+                    }
+
+                    // 点击切换列
+                    var _initTab = function () {
+                        var arrLi = oThis.properties.oUl.getElementsByTagName('li')
+                        for (var i = 0; i < arrLi.length; i++) {
+                            // 闭包循环绑定事件
+                            arrLi[i].onclick = (function (i) {
+                                return function (e) {
+                                    oThis.select(i)
+                                }
+                            })(i);
+                        }
+                    }
+
+                    /**
+                     * ===========================
+                     * 特权方法
+                     * ===========================
+                     */
+                    this.create = function () {
+                        flag === true ? this.destory() : null
+
+                        var oSidebar = document.createElement('aside')
+                        var oUl = document.createElement('ul')
+                        var oMain = document.createElement('main')
+
+                        // 添加全局dom对象，用以添加事件
+                        oThis.properties.oSidebar = oSidebar
+                        oThis.properties.oMain = oMain
+                        oThis.properties.oUl = oUl
+                        oThis.properties.layers = []
+                        
+
+                        // 列，节，层，层文件数，
+                        var c_aFrag = document.createDocumentFragment()
+                        var i_aFrag = document.createDocumentFragment()
+                        var j_aFrag = document.createDocumentFragment()
+                        var k_aFrag = document.createDocumentFragment()
+                        var m_aFrag = document.createDocumentFragment()
+
+                        // 生成左侧column列表
+                        for (var i = 0; i < this.properties.column; i++) {
+                            var oLi = document.createElement('li')
+                            var oA = document.createElement('a')
+                            oA.innerHTML = '列' + (i + 1)
+                            oLi.appendChild(oA)
+                            c_aFrag.appendChild(oLi)
+                        }
+
+                        // 生成主内容区
+                        for (var i = 0; i < oThis.properties.column; i++) {
+                            // 列
+                            var oWrap = document.createElement('section')
+                            var oFlex = document.createElement('section')
+                            oWrap.className = 'cabinet-flex-wrap'
+                            oFlex.className = 'cabinet-flex'
+
+                            for (var j = 0; j < oThis.properties.section; j++) {
+                                // 节
+                                var oList = document.createElement('section')
+                                var oTitle = document.createElement('div')
+                                var oLine = document.createElement('section')
+                                oList.className = 'cabinet-list'
+                                oTitle.className = 'cabinet-title'
+                                oLine.className = 'cabinet-line clearfloat'
+                                oTitle.innerHTML = '列' + (i + 1) + '节' + (j + 1)
+                                oList.appendChild(oTitle)
+                                oList.appendChild(oLine)
+
+                                // 层
+                                for (var k = 0; k < oThis.properties.layer; k++) {
+                                    var oItem = document.createElement('div')
+                                    var oBox = document.createElement('div')
+                                    oItem.className = 'cabinet-item'
+                                    oBox.className = 'box clearfloat'
+
+                                    // 层中文件
+                                    for (var m = 0; m < 3; m++) {
+                                        var oGrid = document.createElement('div')
+                                        var oSpan = document.createElement('span')
+                                        oGrid.className = 'grid'
+                                        oGrid.appendChild(oSpan)
+                                        m_aFrag.appendChild(oGrid)
+                                    }
+
+                                    oBox.appendChild(m_aFrag)
+                                    oItem.appendChild(oBox)
+                                    k_aFrag.appendChild(oItem)
+
+                                    // 存储层用以绑定事件
+                                    var position = {}
+                                    var oLayer = {}
+                                    position.column = i + 1
+                                    position.section = j + 1
+                                    position.layer = k + 1
+                                    oLayer.el = oBox
+                                    oLayer.position = position
+                                    oThis.properties.layers.push(oLayer)
+                                }
+
+                                oList.appendChild(k_aFrag)
+                                j_aFrag.appendChild(oList)
+                            }
+
+                            oFlex.appendChild(j_aFrag)
+                            oWrap.appendChild(oFlex)
+                            i_aFrag.appendChild(oWrap)
+
+                        }
+
+                        oSidebar.id = 'sidebar'
+                        oMain.id = "main"
+
+                        oUl.appendChild(c_aFrag)
+                        oSidebar.appendChild(oUl)
+
+                        oMain.appendChild(i_aFrag)
+
+                        oThis.properties.oParent.appendChild(oSidebar)
+                        oThis.properties.oParent.appendChild(oMain)
+                    }
+
+                    this.select = function (index) {
+                        var arrLi = oThis.properties.oUl.getElementsByTagName('li')
+                        
+                        var arrFlexWrap = oThis.properties.oMain.getElementsByClassName(
+                            'cabinet-flex-wrap')
+                        for (var i = 0; i < arrLi.length; i++) {
+                            i === index ? arrLi[i].className = 'active' : arrLi[i].className = ''
+                        }
+                        for (var j = 0; j < arrLi.length; j++) {
+                            j === index ? arrFlexWrap[j].className = 'cabinet-flex-wrap active' :
+                                arrFlexWrap[j].className = 'cabinet-flex-wrap'
+                        }
+                    }
+
+                    this.getCurrentLayer = function () {
+                        return currentLayer
+                    }
+
+                    this.setCurrentLayer = function (o) {
+                        currentLayer = o
+                    }
+
+                    this.addEvent = function (oElement, sEventType, fnHandler) {
+                        return oElement.addEventListener ? oElement.addEventListener(sEventType,
+                            fnHandler, false) : oElement.attachEvent("on" + sEventType,
+                            fnHandler)
+                    }
+
+                    this.reload = function (column, section, layer, capacity) {
+                        flag = a(true)()
+                        
+                        this.properties.column = column
+                        this.properties.section = section
+                        this.properties.layer = layer
+                        this.properties.capacity = capacity
+                        oThis = this
+                        _initialize()
+                        
+                    }
+
+                    this.destory = function () {
+                        oThis.empty()
+                    }
+
+                    // 自定义事件
+                    this.events = {
+                        clickLayer: function () {},
+                        dblclickLayer: function () {}
+                    }
+                    
+                    // 初始化
+                    flag === false ? _initialize() : null
+
+                    // 执行方式
+                    try {
+                        if (typeof arguments[0] === 'string' && typeof arguments[1] === 'object') {
+                            var params = []
+                            for (var i in arguments[1]) {
+                                params.push(arguments[1][i])
+                            }
+                            this[arguments[0]].apply(this, params)
+                        }
+
+                        if (typeof arguments[0] === 'string' && arguments.length === 1) {
+
+                            this.hasOwnProperty(arguments[0]) === true ? this[arguments[0]]() : null
+                        }
+
+                        if (typeof arguments[0] === 'object') {
+                            for (var i in arguments[0]) {
+                                if (this.events.hasOwnProperty(i) === true) {
+                                    this.events[i] = arguments[0][i]
+                                    this.properties.layers.forEach(function (item) {
+                                        var key = i.split('Layer')[0]
+                                        oThis.addEvent(item.el, key, function () {
+                                            oThis.events[i].call(this, item, oThis)
+                                        })
+                                    })
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        console.log(e.message)
+                    }
+
+                    
+                    
+                }
+            });
+
+            // 变量保持，只有reload的时候才重新创建
+            function a(flag) {
+                var i = false;
+
+                function b() {
+                    i = flag || false
+                    return i
+                }
+                return b;
+            }
+            // a()()
+            // a()()
+        })(jQuery);
+
+        // // 方法调用
+        $("#test").cabinet();
+
+
+        // // demo3
+        // $("#test").cabinet('reload', {
+        //     column: 3,
+        //     section: 3,
+        //     layer: 6,
+        //     capacity: 10
+        // })
+
+        // // demo2
+        $("#test").cabinet('select', {
+            index: 2
+        })
+
+        // demo1
+        // $("#test").cabinet({
+        //     dblclickLayer: function (item, o) {
+        //         console.log(item, o, this)
+        //         // o.setCurrentLayer(item)
+        //         // console.log(o.getCurrentLayer())
+        //     }
+        // });
+
+        // $('.btn').on('click', function () {
+        //     console.log($("#test").cabinet('getCurrentLayer'));
+        // })
+        

@@ -1,0 +1,82 @@
+@charset "utf-8";
+html {color:#000;background:#FFF}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td {margin:0;padding:0}
+table {border-collapse:collapse;border-spacing:0}
+fieldset,img {border:0}
+address,caption,cite,code,dfn,em,strong,th,var {font-style:normal;font-weight:normal}
+ol,ul {list-style:none}
+caption,th {text-align:left}
+h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:normal}
+q:before,q:after {content:''}
+abbr,acronym {border:0;font-variant:normal}
+sup {vertical-align:text-top}
+sub {vertical-align:text-bottom}
+input,textarea,select {font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}
+legend {color:#000}
+#yui3-css-stamp.cssreset {display:none}
+.clearfloat:after {display:block;clear:both;content:"";visibility:hidden;height:0}
+.clearfloat {zoom:1}
+.clear {clear:both;}
+*,*:after,*:before {-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.clearfix:before,.clearfix:after {content:" ";display:table;}
+.clearfix:after {clear:both;}
+a {text-decoration:none;}
+html {font-family:"PingFang SC","Helvetica Neue",Helvetica,"Microsoft Yahei",Arial,sans-serif,Lato;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;line-height:1;-webkit-tap-highlight-color:transparent;}
+html,body {background:#fff;-webkit-font-smoothing:antialiased;}
+.container {position:relative;top:45px;margin:0 auto 8px;}
+.container #sidebar {position:fixed;z-index:2;top:45px;width:220px;padding:0 15px;font-size:16px;}
+.container #sidebar ul {border:1px solid #95B8E7;background-color:#fff;}
+#sidebar a {display:block;margin:15px;padding:5px;color:#666;transition:.3s ease;-webkit-transition:.3s ease;-moz-transition:.3s ease;-ms-transition:.3s ease;-o-transition:.3s ease;cursor:pointer;}
+#sidebar .active a,#sidebar a:hover {color:#333;background-color:#ffe48d;}
+#sidebar a {color:inherit;}
+.container #main {position:relative;padding-left:220px;min-height:100%;}
+.cabinet-list .box .grid {position:relative;float:left;width:8%;height:100%;margin:0 1%;word-wrap:break-word;word-break:break-all;font-size:14px;color:#666;text-align:center;border:1px solid #999;text-align:center;overflow:hidden;}
+.cabinet-list .box .grid span {position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);-ms-transform:translateY(-50%);-o-transform:translateY(-50%);}
+.cabinet-line {position:relative;}
+.cabinet-line::before {content:'';position:absolute;bottom:0;left:15px;right:15px;height:1px;background-color:#e5e5e5;}
+.cabinet-item {height:80px;padding:15px 15px 0;}
+.cabinet-item .box {position:relative;width:100%;height:100%;border:1px solid #e5e5e5;transition:.3s ease;-webkit-transition:.3s ease;-moz-transition:.3s ease;-ms-transition:.3s ease;-o-transition:.3s ease;}
+.cabinet-item .box.full {display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;}
+.cabinet-item .box.full::before {background:url(../images/icon-full.png) no-repeat center;background-size:contain;position:absolute;right:0;top:0;bottom:0;left:0;margin:auto;content:'';width:20px;height:20px;z-index:2;}
+.cabinet-item .box:hover,.cabinet-item .box.active {background-color:#ffe48d;cursor:pointer;}
+.cabinet-title {position:relative;height:50px;margin:0 15px;border-bottom:1px solid #e5e5e5;line-height:50px;color:#333;background-size:20px 20px;cursor:pointer;}
+.cabinet-title.active {background-size:20px 20px;color:#eb6100;}
+.cabinet-flex-wrap {display:none;margin-right:15px;padding-bottom:15px;border:1px solid #95B8E7;}
+.cabinet-flex-wrap.active {display:block;}
+.cabinet-flex {display:table;width:100%;min-height:100%;}
+.cabinet-flex .cabinet-list {display:table-cell;min-height:100%;}
+/* 解决滑动 */#AmsMovableRackGridPage {overflow-y:auto;-webkit-overflow-scrolling:touch;}
+#AmsMovableRackGridPage > .panel {position:fixed;}
+/* 顶部下拉列表文字垂直居中 */#AmsMovableRackGridSearchForm {padding:5px;margin-right:5px;}
+.qitem {margin-right:5px;padding:0;vertical-align:middle;}
+.qitem .validatebox-text {height:100%;padding:0 5px !important;}
+.qitem > label:first-child,.qitem label.label {width:auto;min-width:65px;}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {width:6px;height:6px;/*background-color:#F5F5F5;*/}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {/*-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);*/    /*border-radius:10px;*/    /*background-color:#F5F5F5;*/}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {border-radius:10px;-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);background-color:#555;}
+.l-btn {outline:none;}
+.c-mask {position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);}
+.c-layer {position:fixed;top:0;right:0;bottom:0;left:0;width:90%;height:90%;margin:auto;background-color:#fff;border-radius:2px;font:14px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;}
+.c-layer-title {padding:0 80px 0 20px;height:42px;line-height:42px;border-bottom:1px solid #eee;font-size:14px;color:#333;overflow:hidden;background-color:#F8F8F8;border-radius:2px 2px 0 0;}
+.c-btn-group {position:absolute;right:15px;top:15px;font-size:0;line-height:initial;}
+.c-btn {display:inline-block;background:url(../images/icon.png) no-repeat;position:relative;width:16px;height:16px;font-size:12px;_overflow:hidden;}
+.c-btn-close {background-position:1px -40px;cursor:pointer;transition:transform .3s ease;-webkit-transition:transform .3s ease;}
+.c-btn-close:hover {transform:rotate(90deg);-webkit-transform:rotate(90deg);}
+.c-content::after {content:'';display:block;height:0;visibility:hidden;clear:both;}
+.c-content,.c-foot {margin:15px 15px 0;}
+.c-content {zoom:1;overflow:hidden;overflow:hidden;text-align:center;}
+.c-foot {overflow:hidden;}
+.c-foot .r {color:#009688;}
+.c-item {position:relative;display:inline-block;*display:inline;*zoom:1;width:40px;height:160px;border:1px solid #e5e5e5;margin:0 auto;text-align:center;line-height:160px;}
+.c-item:hover {cursor:pointer;}
+.c-item.active::after,.c-item:hover::after {content:'';position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;width:30px;height:30px;margin:auto;background:url(com/iwt/ams/res/assets/js/totem/totemCabinet/images/icon.png) no-repeat -30px 0;}
+.btn-group1 {padding:15px 0;text-align:center;}
+.btn1 {display:inline-block;height:30px;line-height:30px;padding:0 18px;color:#fff;white-space:nowrap;text-align:center;font-size:14px;border:none;border-radius:2px;cursor:pointer;vertical-align:middle;outline:none;}
+.btn-save {background-color:#009688;}
+.btn-cancel {border:1px solid #C9C9C9;background-color:#fff;color:#555;}
+.c-line {padding:15px 0;}
+.txt-center {text-align:center;}
+

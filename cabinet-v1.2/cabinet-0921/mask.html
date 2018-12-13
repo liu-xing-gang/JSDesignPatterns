@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .c-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .4);
+        }
+
+        .c-layer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 90%;
+            height: 90%;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 2px;
+            font: 14px Helvetica Neue, Helvetica, PingFang SC, Tahoma, Arial, sans-serif;
+        }
+
+        .c-layer-title {
+            padding: 0 80px 0 20px;
+            height: 42px;
+            line-height: 42px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+            color: #333;
+            overflow: hidden;
+            background-color: #F8F8F8;
+            border-radius: 2px 2px 0 0;
+        }
+
+        .c-btn-group {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-size: 0;
+            line-height: initial;
+        }
+
+        .c-btn {
+            display: inline-block;
+            background: url(icon.png) no-repeat;
+            position: relative;
+            width: 16px;
+            height: 16px;
+            font-size: 12px;
+            _overflow: hidden;
+        }
+
+        .c-btn-close {
+            background-position: 1px -40px;
+            cursor: pointer;
+            transition: transform .3s ease;
+            -webkit-transition: transform .3s ease;
+        }
+
+        .c-btn-close:hover {
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+        }
+
+        .c-content::after {
+            content: '';
+            display: block;
+            height: 0;
+            visibility: hidden;
+            clear: both;
+        }
+
+        .c-content,
+        .c-foot {
+            margin: 15px 15px 0;
+        }
+
+        .c-content {
+            zoom: 1;
+            overflow: hidden;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .c-foot {
+            overflow: hidden;
+        }
+
+        .c-foot .r {
+            color: #009688;
+        }
+
+        .c-item {
+            position: relative;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            width: 40px;
+            height: 160px;
+            border: 1px solid #e5e5e5;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 160px;
+        }
+
+        .c-item:hover {
+            cursor: pointer;
+        }
+
+        .c-item.active::after,
+        .c-item:hover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            width: 30px;
+            height: 30px;
+            margin: auto;
+            background: url(icon.png) no-repeat -30px 0;
+        }
+
+        .btn-group1{
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .btn1{
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 18px;
+            color: #fff;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 14px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            vertical-align: middle;
+            outline: none;
+        }
+
+        .btn-save,.btn-resave {
+            background-color: #009688;
+        }
+
+        .btn-cancel {
+            border: 1px solid #C9C9C9;
+            background-color: #fff;
+            color: #555;
+        }
+        .c-line{padding: 15px 0;}
+        .txt-center{text-align: center;}
+    </style>
+</head>
+
+<body>
+    <div class="c-mask"></div>
+    <div class="c-layer">
+        <div class="c-layer-title">
+            <span>选择位置</span>
+            <span class="c-btn-group">
+                    <a class="c-btn c-btn-close" href="javascript:;"></a>
+            </span>
+
+        </div>
+        <div class="c-content">
+            <div class="c-item active">1</div>
+            <div class="c-item">2</div>
+            <div class="c-item">3</div>
+            <div class="c-item">4</div>
+            <div class="c-item">5</div>
+            <div class="c-item">6</div>
+            <div class="c-item">7</div>
+            <div class="c-item">8</div>
+            <div class="c-item">9</div>
+            <div class="c-item">10</div>
+            <div class="c-item">11</div>
+            <div class="c-item">12</div>
+            <div class="c-item">13</div>
+            <div class="c-item">14</div>
+            <div class="c-item">15</div>
+        </div>
+        <div class="c-foot">
+            <div class="c-line txt-center">
+                <span class="pull-left">已选:</span>
+                <span class="r">1,2,3,3,4</span>
+            </div>
+            <div class="btn-group1">
+                <button type="button" class="btn1 btn-save">确认</button>
+                <button type="button" class="btn1 btn-cancel">取消</button>
+            </div>
+
+            <div class="btn-group1 btn-re">
+                <button type="button" class="btn1 btn-resave">保存</button>
+                <button type="button" class="btn1 btn-recancel">取消</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

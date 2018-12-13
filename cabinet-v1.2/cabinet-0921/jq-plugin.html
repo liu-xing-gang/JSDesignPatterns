@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/cabinet.css">
+</head>
+
+<body>
+
+    <div id="test">jq对象级别插件</div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script>
+        (function ($) {
+            $.fn.extend({
+                "color": function (value) {
+                    return this.css("color", value);
+                }
+            });
+        })(jQuery)
+
+        $("#test").color('red');
+
+        function a() {
+            var i = 0;
+            function b() {
+                console.log(i++);
+            }
+            return b;
+        }
+        var c = a();
+        c();
+        c();
+        c()
+    </script>
+</body>
+
+</html>

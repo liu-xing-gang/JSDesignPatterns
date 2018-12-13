@@ -1,0 +1,184 @@
+var Cabinet = function () {
+    this.init.apply(this, arguments)
+}
+Cabinet.prototype = {
+    init: function (id, data) {
+        var _this = this
+        this.data = data
+        this.oParent = document.getElementById(id)
+        this.create(this.data)
+        this.select(0)
+        
+        // 添加外部事件
+        if(this.data.on){
+            for(var key in this.data.on){
+                this[key] = this.data.on[key]
+                this.layers.forEach(function(item){
+                    _this.addEvent(item.el, key, function () {
+                        _this[key].call(this, item)
+                    })
+                })
+            }
+        }
+
+        // 点击切换列
+        var arrLi = this.oUl.getElementsByTagName('li')
+        
+        for(var i = 0; i < arrLi.length; i++){
+            // 闭包循环绑定事件
+            arrLi[i].onclick = (function(i){
+                return function(){
+                    _this.select(i)
+                }
+           })(i);
+        }
+
+        // 点击层
+        var arrLayers = this.layers
+        for(var j=0; j<arrLayers.length; j++){
+            arrLayers[j].el.onclick = (function(index,o){
+                return function(){
+                   alert(JSON.stringify(o.position))
+                }
+           })(j,arrLayers[j]); 
+        }
+    },
+    create: function () {
+        var _this = this
+        var oSidebar = document.createElement('aside')
+        var oUl = document.createElement('ul')
+        var oMain = document.createElement('main')
+        // var oWrap = document.createElement('section')
+
+        // 添加全局dom对象，用以添加事件
+        this.oSidebar = oSidebar
+        this.oMain = oMain
+        this.oUl = oUl
+        this.layers = []
+
+        // 列，节，层，层文件数，
+        var c_aFrag = document.createDocumentFragment()
+        var i_aFrag = document.createDocumentFragment()
+        var j_aFrag = document.createDocumentFragment()
+        var k_aFrag = document.createDocumentFragment()
+        var m_aFrag = document.createDocumentFragment()
+
+        /**
+         * 生成左侧column列表
+         */
+        for (var i = 0; i < this.data.column; i++) {
+            var oLi = document.createElement('li')
+            var oA = document.createElement('a')
+            oA.innerHTML = '列'+(i+1)
+            oLi.appendChild(oA)
+            c_aFrag.appendChild(oLi)
+        }
+
+        /**
+         * 生成主内容区
+         */
+        for (var i = 0; i < this.data.column; i++) {
+            // 列
+            var oWrap = document.createElement('section')
+            var oFlex = document.createElement('section')
+            oWrap.className = 'cabinet-flex-wrap'
+            oFlex.className = 'cabinet-flex'
+
+            for (var j = 0; j < this.data.section; j++) {
+                // 节
+                var oList = document.createElement('section')
+                var oTitle = document.createElement('div')
+                var oLine = document.createElement('section')
+                oList.className = 'cabinet-list'
+                oTitle.className = 'cabinet-title'
+                oLine.className = 'cabinet-line clearfloat'
+                oTitle.innerHTML = '列'+(i+1)+'节' + (j+1)
+                oList.appendChild(oTitle)
+                oList.appendChild(oLine)
+
+                // 层
+                for (var k = 0; k < this.data.layer; k++) {
+                    var oItem = document.createElement('div')
+                    var oBox = document.createElement('div')
+                    oItem.className = 'cabinet-item'
+                    oBox.className = 'box clearfloat'
+
+                    // 层中文件
+                    for (var m = 0; m < 3; m++) {
+                        var oGrid = document.createElement('div')
+                        var oSpan = document.createElement('span')
+                        oGrid.className = 'grid'
+                        oGrid.appendChild(oSpan)
+                        m_aFrag.appendChild(oGrid)
+                    }
+
+                    oBox.appendChild(m_aFrag)
+                    oItem.appendChild(oBox)
+                    k_aFrag.appendChild(oItem)
+
+                    // 存储层用以绑定事件
+                    var position = {}
+                    var oLayer = {}
+                    position.column = i+1
+                    position.section = j+1
+                    position.layer = k+1
+                    oLayer.el = oBox
+                    oLayer.position = position
+                    _this.layers.push(oLayer)
+                }
+
+
+                oList.appendChild(k_aFrag)
+                j_aFrag.appendChild(oList)
+            }
+
+            oFlex.appendChild(j_aFrag)
+            oWrap.appendChild(oFlex)
+            i_aFrag.appendChild(oWrap)
+            
+        }
+
+        oSidebar.id = 'sidebar'
+        oMain.id = "main"
+        
+
+        oUl.appendChild(c_aFrag)
+        oSidebar.appendChild(oUl)
+        
+        oMain.appendChild(i_aFrag)
+
+        this.oParent.appendChild(oSidebar)
+        this.oParent.appendChild(oMain)
+    },
+    select: function (index) {
+        var arrLi = this.oUl.getElementsByTagName('li')
+        var arrFlexWrap = this.oMain.getElementsByClassName('cabinet-flex-wrap')
+        for(var i=0; i < arrLi.length; i++){
+            i === index ? arrLi[i].className = 'active' : arrLi[i].className = ''
+        }
+        for(var j=0; j < arrLi.length; j++){
+            j === index ? arrFlexWrap[j].className = 'cabinet-flex-wrap active' : arrFlexWrap[j].className = 'cabinet-flex-wrap'
+        }
+    },
+    addEvent : function (oElement, sEventType, fnHandler)
+	{
+		return oElement.addEventListener ? oElement.addEventListener(sEventType, fnHandler, false) : oElement.attachEvent("on" + sEventType, fnHandler)
+	},
+}
+
+$(function(){
+    var cabinet = new Cabinet('cabinet', {
+        column: 6,
+        section: 6,
+        layer: 6,
+        on: {
+            mouseover: function (item) {
+                // handleClick(item.cabinetId, item.data, 'new title')
+                // console.log(item)
+            }
+        }
+    });
+
+    
+})
+

@@ -135,8 +135,8 @@ try {
                 // $('.c-item.active').each(function () {
                 //     $('.c-line .r').append($(this).index() + 1 + ' ')
                 // })
-                if($('.c-item.active').not('tie').index() != -1)
-                    $('.c-line .r').append($('.c-item.active').not('tie').index() + 1)
+                if($('.c-item.active').not('.tie').index() != -1)
+                    $('.c-line .r').append($('.c-item.active').not('.tie').index() + 1)
             }
 
             // 移除选位和选位控制
@@ -169,7 +169,7 @@ try {
                 //     $('body').removeClass('active')
                 // }, 1500)
                 // removeTie()
-                if($('.c-item.active').index() != -1){
+                if($('.c-item.active').not('.tie').index() != -1){
                     _this.showConfirm()
                 } else {
                     $.layer.msg('请选择1个位置!')

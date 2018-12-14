@@ -87,7 +87,7 @@ ffmpeg -re -i in.oceans -map 0 -codec:v libx264 -codec:a aac -f segment -segment
     // play('http://localhost:9001/JSDesignPatterns/m3u8/playlist.m3u8')
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:9001/JSDesignPatterns/clappr.php',
+        url: '/JSDesignPatterns/clappr.php',
         success: function (response) {
             play(response)
         }

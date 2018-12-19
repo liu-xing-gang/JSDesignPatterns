@@ -17,11 +17,9 @@
     <div id="app" v-cloak>
         {{message}}
     </div>
-
     <div id="app-3">
         <p v-if="seen">seen</p>
     </div>
-
     <div id="app-4">
         <ol>
             <li v-for="todo in todos" v-cloak>
@@ -29,13 +27,52 @@
             </li>
         </ol>
     </div>
-
     <div id="app5">
         <div id="mount-point" v-cloak></div>
     </div>
-
     <div id="app6" v-cloak>
         ${hello}
+    </div>
+
+    <div id="app7">
+        <h2>具名插槽</h2>
+
+        <!-- <base-layout> -->
+        <div id="container">
+            <header>
+                <slot name="header"></slot>
+            </header>
+            <main>
+                <slot></slot>
+            </main>
+            <footer>
+                <slot name="footer"></slot>
+            </footer>
+        </div>
+
+        <!-- 具名插槽提供内容1 -->
+        <base-layout>
+            <template slot="header">
+                <h1>Here might be a page title</h1>
+            </template>
+
+            <p>A paragraph for the main content.</p>
+            <p>And another one.</p>
+
+            <template slot="footer">
+                <p>Here's some contact info</p>
+            </template>
+        </base-layout>
+
+        <!-- 具名插槽提供内容2 -->
+        <base-layout>
+            <h1 slot="header">Here might be a page title</h1>
+
+            <p>A paragraph for the main content.</p>
+            <p>And another one.</p>
+
+            <p slot="footer">Here's some contact info</p>
+        </base-layout>
     </div>
 
     <script src="vue.min.js"></script>
@@ -118,6 +155,9 @@
             },
             delimiters: ['${','}']
         })
+
+
+
     </script>
 </body>
 

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div>剑的三层境界：一是手中有剑，心中亦有剑；二是手中无剑，心中有剑；三是手中无剑，心中亦无剑.</div>
+<div>__鸟哥</div>
+ 
+
+
+    <pre>
+        Array
+            _.chunk(array, [size=1])
+
+            _.compact(array)
+
+            _.difference(array, [values])
+
+            _.drop(array, [n=1])
+
+            _.dropRight(array, [n=1])
+
+            _.dropRightWhile(array, [predicate=_.identity], [thisArg])
+
+            _.dropWhile(array, [predicate=_.identity], [thisArg])(dropped from the beginning, 其余同上 )
+
+            _.fill(array, value, [start=0], [end=array.length])
+
+            _.findIndex(array, [predicate=_.identity], [thisArg])
+
+            _.findLastIndex(array, [predicate=_.identity], [thisArg])
+
+            _.first(array) _.last(array)
+
+            _.flatten(array, [isDeep])
+
+            _.flattenDeep(array)
+
+            _.indexOf(array, value, [fromIndex=0])
+
+            _.initial(array) 与 _.rest(array)和_.tail相反
+
+            _.intersection([arrays]) 与 _.difference相反
+
+            _.lastIndexOf(array, value, [fromIndex=array.length-1])
+
+            _.pull(array, [values])
+
+            _.pullAt(array, [indexes])
+
+            _.remove(array, [predicate=_.identity], [thisArg])
+
+            _.slice(array, [start=0], [end=array.length])
+
+            _.sortedIndex(array, value, [iteratee=_.identity], [thisArg])
+
+            _.sortedLastIndex(array, value, [iteratee=_.identity], [thisArg])
+
+            _.take(array, [n=1])
+            _.takeRight(array, [n=1]) 
+            _.takeRightWhile(array, [predicate=_.identity], [thisArg]) 
+            _.takeWhile(array, [predicate=_.identity], [thisArg])
+
+            .union([arrays])
+
+            _.uniq(array, [isSorted], [iteratee], [thisArg]) 与_.unique相同
+
+            _.unzip(array) 与_.flatten相反
+
+            _.unzipWith(array, [iteratee], [thisArg])
+
+            _.without(array, [values])
+
+            _.xor([arrays]) 异或
+
+            _.zip([arrays])
+
+            _.zipObject(props, [values=[]]) _.object 数组转对象
+
+        Chain
+            _(value)    
+
+            _.chain(value)
+
+            _.tap(value, interceptor, [thisArg])
+
+            _.thru(value, interceptor, [thisArg])
+
+            _.prototype.chain
+
+            _.prototype.commit()
+
+            _.prototype.plant()
+
+            _.prototype.reverse()
+
+            _.prototype.toString()
+
+            _prototype.value()
+
+        Collections
+            _.at(collection, [props])   
+
+            _.countBy(collection, [iteratee=_.identity], [thisArg]) 
+
+            _.every(collection, [predicate=_.identity], [thisArg])
+
+            _.filter(collection, [predicate=_.identity], [thisArg])
+
+            _.find(collection, [predicate=_.identity], [thisArg])
+
+            _.findLast(collection, [predicate=_.identity], [thisArg])
+            _.findWhere(collection, source)
+
+            .forEach(collection, [iteratee=_.identity], [thisArg])
+
+            _.forEachRight(collection, [iteratee=_.identity], [thisArg])
+
+            _.groupBy(collection, [iteratee=_.identity], [thisArg])
+
+            _.includes(collection, target, [fromIndex=0]) Aliases _.contains和_.include
+
+            _.indexBy(collection, [iteratee=_.identity], [thisArg])
+
+            _.invoke(collection, path, [args])
+
+            _.map(collection, [iteratee=_.identity], [thisArg])
+
+            _.partition(collection, [predicate=_.identity], [thisArg])
+
+            _.pluck(collection, path)
+
+            _.reduce(collection, [iteratee=_.identity], [accumulator], [thisArg])
+            _.reduceRight(collection, [iteratee=_.identity], [accumulator], [thisArg])
+
+            _.reject(collection, [predicate=_.identity], [thisArg])
+
+            _.sample(collection, [n]) (*): Returns the random sample(s)
+
+            _.shuffle(collection)洗牌
+
+            _.size(collection) collection(Array|Object|String)
+
+            _.some(collection, [predicate=_.identity], [thisArg]) 与 _.every
+
+            _.sortBy(collection, [iteratee=_.identity], [thisArg])
+
+            _.sortByAll(collection, iteratees)
+
+            _.sortByOrder(collection, iteratees, [orders])
+
+            _.where(collection, source)
+        Date
+
+        Function
+
+        Lang
+
+        Math
+            _.add(augend, addend)
+            _.ceil(n, [precision=0]) 向上取整
+            _.floor(n, [precision=0]) 向下取整
+            _.max(collection, [iteratee], [thisArg])
+            _.min(collection, [iteratee], [thisArg])
+            _.round(n, [precision=0]) 四舍五入
+            _.sum(collection, [iteratee], [thisArg])
+
+        Number
+
+        Object
+
+        String
+
+        Utility
+
+        Properties
+    </pre>
+    <script src="lodash.min.js"></script>
+    <script>
+    console.log(undefined +1)
+    console.log(parseInt('Hello'))
+        // Array
+        console.log(_.chunk(['a', 'b', 'c', 'd'], 2))
+        console.log(_.chunk(['a', 'b', 'c'], 2))
+
+        console.log(_.compact([0, 1, false, 2, '', 3]))
+
+        console.log(_.difference([1, 2, 3], [4, 2]))
+
+        console.log(_.drop([1, 2, 3]), ' drop')
+        console.log(_.drop([1, 2, 3], 2), 2)
+        console.log(_.drop([1, 2, 3], 5), 5)
+        console.log(_.drop([1, 2, 3], 0), 0)
+
+        console.log(_.dropRight([1, 2, 3]), '_.dropRight')
+        console.log(_.dropRight([1, 2, 3], 2))
+
+        console.log(_.dropRightWhile([1, 2, 3], function (n) {return n > 1}), '_dropRightWhile')
+        var users = [
+            { 'user': 'barney',  'active': true },
+            { 'user': 'fred',    'active': false },
+            { 'user': 'pebbles', 'active': false }
+        ];
+        console.log(_.pluck(_.dropRightWhile(users, {'user': 'pebbles', 'active': false}), 'user'))
+        console.log(_.pluck(_.dropRightWhile(users, 'active'), 'user'))
+        
+        var array = [1, 2, 3]
+        _.fill(array, 'a')
+        console.log(array, '_fill')
+        console.log(_.fill(Array(3), 2))
+        console.log(_.fill([4, 6, 8], '*', 1, 2))
+
+        var users = [
+            { 'user': 'barney',  'active': false },
+            { 'user': 'fred',    'active': false },
+            { 'user': 'pebbles', 'active': true }
+        ];
+        console.log(_.findIndex(users, function (chr) {return chr.user == 'barney'}), '_.findIndex')
+        console.log(_.findIndex(users, {'user': 'fred', 'active': false}))
+
+        console.log(_.first([1, 2, 3]), '_first')
+
+        console.log(_.flatten([1, [2, 3, [4]]]), '_.flatten')
+        console.log(_.flatten([1, [2, 3, [4]]], true), true)
+
+        console.log(_.indexOf([1, 2, 1, 2], 2), '_.indexOf')
+        console.log(_.indexOf([1, 2, 1, 2], 2, 2))
+        console.log(_.indexOf([1, 1, 2, 2], 2, true), 'binary search')
+
+        console.log(_.initial([1, 2, 3]), '_.initial')
+
+        console.log(_.intersection([1, 2], [4, 2], [2, 1]), '_intersection')
+
+        var array = [1, 2, 3, 1, 2, 3]
+        _.pull(array, 2, 3)
+        console.log(array, '_pull')
+
+        var array = [5, 10, 15, 20]
+        var events = _.pullAt(array, 1, 3)
+        console.log(array, '_pullAt')
+        console.log(events)
+
+        var array = [1, 2, 3, 4]
+        var evens = _.remove(array, function (n) {
+            return n %2 == 0
+        })
+        console.log(array, '_remove')
+        console.log(evens)
+
+        console.log(_.rest([1, 2, 3]), '_.rest')
+
+        console.log(_.slice([1, 2, 3, 4], 2), '_.slice')
+
+        var array = [30, 50]
+        _.sortedIndex(array, 40)
+        console.log(array, '_.sortedIndex')
+
+        console.log(_.take([1, 2, 3], 2), '_.take')
+
+        console.log(_.union([1, 2], [4, 2], [2, 1]), '_union')
+
+        console.log(_.uniq([2, 1, 2]), '_uniq')
+        console.log(_.uniq([1, 1, 2, 2], true))
+
+        var zipped = _.zip(['fred', 'barney'], [30, 40], [true, false])
+        console.log(zipped, _.unzip(zipped), '_.unzip _.zip')
+
+        var zipped = _.zip([1, 2], [10, 20], [100, 200])
+        console.log(_.unzipWith(zipped, _.add))
+
+        console.log(_.without([1, 2, 1, 3], 1, 2), '_.without')
+
+        console.log(_.xor([1, 2], [4, 2]), '_.xor')
+
+        console.log(_.object([['fred', 30], ['barney', 40]]), '_.object')
+        console.log(_.object(['fred', 'barney'], [30, 40]))
+    
+        // Chain
+        var wrapped = _([1, 2, 3])
+        var total = wrapped.reduce(function (total, n) {
+            return total + n
+        })
+        var squares = wrapped.map(function (n) {
+            return n * n
+        })
+        console.log(total,  _.isArray(squares), _.isArray(squares.value()), squares.value(), '_(value)')
+
+        var users = [
+            { 'user': 'barney',  'age': 36 },
+            { 'user': 'fred',    'age': 40 },
+            { 'user': 'pebbles', 'age': 1 }
+        ];
+        var youngest = _.chain(users).sortBy('age').map(function(chr){return chr.user + 'is' + chr.age}).first().value()
+        console.log(youngest, '_chain')
+
+        console.log(_([1, 2, 3]).tap(function (array) {array.pop()}).reverse().value(), '_tap') 
+
+        console.log(_(' abc ').chain().trim().thru(function (value) {return [value]}).value(), '_thru')
+
+        var users = [
+            { 'user': 'barney', 'age': 36 },
+            { 'user': 'fred',   'age': 40 }
+        ];
+        console.log(_(users).first())
+        console.log(_(users).chain().first().pick('user').value(), '_prototype.chain')
+
+        var array = [1, 2]
+        var wrapped = _(array).push(3)
+        console.log(array)
+        wrapped = wrapped.commit()
+        console.log(array, '_prototype.commit')
+
+        var array = [1]
+        var wrapped = _(array).concat(2, [3], [[4]])
+        console.log(array, wrapped.value(), '_.prototype.concat')
+
+        var array = [1, 2]
+        var wrapped = _(array).map(function (value) {
+            return Math.pow(value, 2)
+        })
+
+        var other = [3, 4]
+        var otherWrapped = wrapped.plant(other)
+        console.log(wrapped.value(), otherWrapped.value(), '_.prototype.plant')
+
+        var array = [1, 2, 3]
+        console.log(_(array).reverse().value(), '_.prototype.reverse')
+
+        console.log(_([1, 2, 3]).toString(), '_.prototype.toString')
+
+        console.log(_({a: 1, b: 2}).value(), '_.prototype.value()')
+
+        console.log(_.at(['a', 'b', 'c'], [0, 2]), '_.at')
+        console.log(_.at(['a', 'b', 'c'], 0, 2))
+
+        console.log(_.countBy([4.3, 6.1, 6.4], function (n) {return Math.floor(n)}), '_.countBy')
+        console.log(_.countBy(['one', 'two', 'three'], 'length'))
+
+        console.log(_.every([true, 1, null, 'yes'], Boolean), '_.every')
+        var users = [
+            { 'user': 'barney', 'active': false },
+            { 'user': 'fred',   'active': false }
+        ];
+ 
+        // using the `_.matches` callback shorthand
+        _.every(users, { 'user': 'barney', 'active': false });
+        // => false
+ 
+        // using the `_.matchesProperty` callback shorthand
+        _.every(users, 'active', false);
+        // => true
+ 
+        // using the `_.property` callback shorthand
+        _.every(users, 'active');
+        // => false
+
+        console.log( _.filter([4, 5, 6], function (n) {
+            return n % 2 == 0
+        }), '_.filter')
+
+        var users = [
+            { 'user': 'barney',  'age': 36, 'active': true },
+            { 'user': 'fred',    'age': 40, 'active': false },
+            { 'user': 'pebbles', 'age': 1,  'active': true }
+        ];
+        console.log(_.result(_.find(users, function (chr) {return chr.age < 40}), 'user'), '_.find')
+
+        console.log(_.groupBy([4.2, 6.1, 6.4], function (n) {return Math.floor(n)}), '_.groupBy')
+        console.log(_.groupBy(['one', 'two', 'three'], 'length'))
+
+        console.log(_.includes([1, 2, 3], 1), '_includes')
+        console.log(_.includes([1, 2, 3], 1, 2))
+        console.log('pebbles', 'eb')
+
+        var keyData = [
+            { 'dir': 'left', 'code': 97 },
+            { 'dir': 'right', 'code': 100 },
+            { 'dir': 'right2', 'code': 1010 }
+        ];
+        console.log(_.indexBy(keyData, 'dir'), '_.indexBy')
+
+        console.log(_.invoke([[5, 1, 7], [3, 2, 1]], 'sort'), '_.invoke')
+        console.log(_.invoke([123, 456], String.prototype.split, ''))
+
+        function timesThree(n){
+            return n * 3
+        }
+        console.log(_.map([1, 2], timesThree), '_map')
+        var users = [
+            { 'user': 'barney' },
+            { 'user': 'fred' }
+        ];
+        console.log(_.map(users, 'user'))
+
+        console.log(_.partition([1, 2, 3], function (n) {return n % 2}), '_.partititon')
+
+        var users = [
+            { 'user': 'barney', 'age': 36 },
+            { 'user': 'fred',   'age': 40 }
+        ];
+        console.log(_.pluck(users, 'user'), '_.pluck')
+        console.log(_.reduce([1, 2], function (total, n) {return total + n}), '_reduce')
+
+        console.log(_.reject([1, 2, 3, 4], function (n) {return n%2 == 0}), '_reject')
+
+        console.log(_.shuffle([1, 2, 3, 4]), '_.shuffle')
+
+        console.log(_.size([1, 2, 3]), '_.size')
+        console.log(_.size({'a': 1, 'b': 2}))
+        console.log(_.size('pebbles'))
+
+        var users = [
+            { 'user': 'fred',   'age': 48 },
+            { 'user': 'barney', 'age': 36 },
+            { 'user': 'fred',   'age': 42 },
+            { 'user': 'barney', 'age': 34 }
+        ];
+        console.log(_.map(_.sortByAll(users, ['user', 'age']), _.values), '_sortByAll')
+
+        var users = [
+            { 'user': 'fred',   'age': 48 },
+            { 'user': 'barney', 'age': 34 },
+            { 'user': 'fred',   'age': 42 },
+            { 'user': 'barney', 'age': 36 }
+        ];
+        console.log(_.map(_.sortByOrder(users, ['user', 'age'], ['asc', 'desc']), _.values), '_.sortByOrder')
+    </script>
+</body>
+</html>

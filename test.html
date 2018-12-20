@@ -10,12 +10,7 @@
     <button type="button" class="btn">test</button>
     <script src="jquery-1.10.2.min.js"></script>
     <script>
-        $('.btn').on('click', function(){
-            $.ajax({
-                type: 'GET',
-                url: '/JSDesignPatterns/queue.php'
-            })
-        })
+        $('body').append("<ul style='padding-top:80px;'><li style='color:#4aef23;display: inline-block; *display: inline; *zoom: 1;font-size:22px;'>委托阶段</li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;'>— — —></li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;font-size:22px;'>排程阶段</li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;'>— — —></li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;font-size:22px;'>试验阶段</li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;'>— — —></li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;font-size:22px;'>报告阶段</li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;'>— — —></li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;font-size:22px;'>试验已完成</li></ul>")
     </script>
 </body>
 </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- saved from url=(0025)http://localhost:8080/jwt -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<pre>    JWT应用场景：
+        身份认证在这种场景下，一旦用户完成了登陆，在接下来的每个请求中包含JWT，可以用来验证用户身份以及对路由，服务和资源的访问权限进行验证。
+        由于它的开销非常小，可以轻松的在不同域名的系统中传递，所有目前在单点登录（SSO）中比较广泛的使用了该技术。
+        信息交换在通信的双方之间使用JWT对数据进行编码是一种非常安全的方式，由于它的信息是经过签名的，可以确保发送者发送的信息是没有经过伪造的
+
+    JWT例子：
+        eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
+
+    JWT包含了三部分：
+        header
+            {alg: "HS256", typ: "JWT"}
+
+        playload (标准中注册的声明， 公共的声明, 私有的声明)
+            iss: jwt签发者
+            sub: 面向的用户(jwt所面向的用户)
+            aud: 接收jwt的一方
+            exp: 过期时间戳(jwt的过期时间，这个过期时间必须要大于签发时间)
+            nbf: 定义在什么时间之前，该jwt都是不可用的.
+            iat: jwt的签发时间
+            jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。
+
+            公共的声明 ：
+            公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.
+
+            私有的声明 ：
+            私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。
+
+        signature
+            HMACSHA256(base64UrlEncode(header) + "." +base64UrlEncode(payload),secret)
+
+        Putting all together
+            base64UrlEncode(header).base64UrlEncode(playload).HMACSHA256(base64UrlEncode(header) + "." +base64UrlEncode(payload),secret)
+
+</pre>
+
+</body></html>

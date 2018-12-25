@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+            状态模式定义一个对象，这个对象可以通过管理其状态从而使得应用程序作出相应的变化。状态模式是一个非常常用的设计模式，它主要有两个角色组成：
+            （1）环境类：拥有一个状态成员，可以修改其状态并作出相应反应。
+            （2）状态类：表示一种状态，包含其相应的处理方法
+    </pre>
+    <script>
+        /**
+         * 状态模式
+         */ 
+        // 例1：红绿灯
+        var trafficeLight = (function () {
+            var currentLight = null
+
+            return {
+                change: function (light) {
+                    currentLight = light
+                    currentLight.go()
+                }
+            }
+        })();
+
+        var RedLight = function () {}
+        var GreenLight = function () {}
+        var YellowLight = function () {}
+
+        RedLight.prototype.go = function () {
+            console.log('Red light now!')
+        }
+
+        GreenLight.prototype.go = function () {
+            console.log('Green light now!')
+        }
+
+        YellowLight.prototype.go = function () {
+            console.log('Green light now!')
+        }
+
+        // 调用
+        trafficeLight.change(new RedLight())
+        trafficeLight.change(new GreenLight())
+
+        // 例2：菜单组件
+        // 环境类
+        var Menu = function () {}
+        Menu.prototype.toggle = function (state) {
+            state()
+        }
+
+        // 状态类
+        var menuStates = {
+            'show': function () {
+                console.log('Menu is showing!')
+            },
+            'hide': function () {
+                console.log('Menu is hiding!')
+            }
+        }
+        // 调用
+        var menu = new Menu()
+        menu.toggle(menuStates.show)
+        menu.toggle(menuStates.hide)
+    </script>
+</body>
+</html>

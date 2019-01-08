@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <div id="app">
+        <p>
+                    <router-link to="/user/foo">/user/foo</router-link>
+                    <router-link to="/user/foo/profile">/user/foo/profile</router-link>
+                    <router-link to="/user/foo/posts">/user/foo/posts</router-link>
+                  </p>
+
+        <router-view></router-view>
+
+        <h1>Named Views</h1>
+        <ul>
+            <li>
+                <router-link to="/">/</router-link>
+            </li>
+            <li>
+                <router-link to="/other">/other</router-link>
+            </li>
+        </ul>
+        <router-view class="view one"></router-view>
+        <router-view class="view two" name="a"></router-view>
+        <router-view class="view three" name="b"></router-view>
+    </div> -->
+
+    <div id="app"></div>
+    <script src="vue.min.js"></script>
+    <script src="vue-router.min.js"></script>
+
+    <script>
+        // 动态路由匹配
+        // const User = {template: `<div>User {{ $route.params.id }}</div>`}
+        // const router = new VueRouter({
+        //      routes: [{path: '/user/:id', component: User}]
+        // })
+        // const app = new Vue({ router }).$mount('#app')
+
+        // 嵌套路由
+        // const User = {
+        //     template: `
+        //         <div>
+        //             <div>User {{ $route.params.id }}</div>
+        //             <router-view></router-view> 
+        //         </div>
+        //     `
+        // }
+        // const UserHome = { template: '<div>Home</div>' }
+        // const UserProfile = {template: `<div>Profile</div>`}
+        // const UserPosts = {template: `Posts`}
+        // const router = new VueRouter({
+        //      routes: [
+        //         {
+        //             path: '/user/:id', 
+        //             component: User,
+        //             children: [
+        //                 { path: '', component: UserHome },
+        //                 {path: 'profile', component: UserProfile},
+        //                 {path: 'posts', component: UserPosts},
+        //             ]
+        //         }
+        //      ]
+        // })
+        // const app = new Vue({ router }).$mount('#app')
+
+        // 编程式的导航
+        // // 带查询参数，变成 /register?plan=private
+        // router.push({path: '/register', query: {plan: 'private'}})
+        // // /user/123
+        // const userId = 123
+        // router.push({name: 'user', params: { userId }})
+        // router.push({path: `/user/${userId}`})
+        // router.replace(location, onComplete?, onAbort?)
+        // router.go(1)
+
+        // 命名路由
+        // const router = new VueRouter({
+        //     routes: [
+        //         {path: '/user/:userId', name: 'user', component: User}
+        //     ]
+        // })
+        // // <router-link :to="{name: 'user', params: {userId: 3}}"></router-link> <=> router.push({name: 'user', params: {userId: 123}})
+
+        // 命名视图
+        // const Foo = {
+        //     template: '<div>foo</div>'
+        // }
+        // const Bar = {
+        //     template: '<div>bar</div>'
+        // }
+        // const Baz = {
+        //     template: '<div>baz</div>'
+        // }
+        // const router = new VueRouter({
+        //     mode: 'history',
+        //     routes: [{
+        //             path: '/',
+        //             components: {
+        //                 default: Foo,
+        //                 a: Bar,
+        //                 b: Baz
+        //             }
+        //         },
+        //         {
+        //             path: '/other',
+        //             components: {
+        //                 default: Baz,
+        //                 a: Bar,
+        //                 b: Foo
+        //             }
+        //         }
+        //     ]
+        // })
+        // new Vue({
+        //     router,
+        //     el: '#app'
+        // })
+
+        // 嵌套命名视图
+
+        // 重定向和别名
+        // const router = new VueRouter({
+        //     routes: [
+        //         {path: '/a', redirect: '/b', alias: '/aa'},
+        //         {path: '/c', redirect: {name: 'foo'}},
+        //         {path: '/c', redirect: to => {
+        //             // 方法接收 目标路由 作为参数
+        //             // return 重定向的 字符串路径/路径对象
+        //         }}
+        //     ]
+        // })
+
+        // 导航守卫
+        // vue-router 提供的导航守卫主要用来通过跳转或取消的方式守卫导航。有多种机会植入路由导航过程中：全局的, 单个路由独享的, 或者组件级的
+
+        // 全局守卫
+        // const router = new VueRouter({})
+        // router.beforeEach((to, from, next) => {})
+        // router.afterEach((to, from) => {})
+
+        // 路由独享的守卫
+        // const router = new VuewRouter({
+        //     routes: [{
+        //         path: '/a',
+        //         component: Foo,
+        //         beforeEnter: (to, from, next) => {}
+        //     }]
+        // })
+
+        // 组件的守卫
+        // const Foo = {
+        //     template: `...`,
+        //     beforeRouteEnter(to, from, next) {
+        //         // 在渲染该组件的对应路由被 confirm 前调用
+        //         // 不！能！获取组件实例 `this`
+        //         // 因为当守卫执行前，组件实例还没被创建
+        //     },
+        //     beforeRouteUpdate(to, from, next) {
+        //         // 在当前路由改变，但是该组件被复用时调用
+        //         // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+        //         // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+        //         // 可以访问组件实例 `this`
+        //     },
+        //     beforeRouteLeave(to, from, next) {
+        //         // 导航离开该组件的对应路由时调用
+        //         // 可以访问组件实例 `this`
+        //     }
+        // }
+
+        const Home = {
+  template: `
+    <div class="home">
+      <h2>Home</h2>
+      <p>hello</p>
+    </div>
+  `
+}
+
+const Parent = {
+  data () {
+    return {
+      transitionName: 'slide-left'
+    }
+  },
+  // dynamically set transition based on route change
+  watch: {
+    '$route' (to, from) {
+      const toDepth = to.path.split('/').length
+      const fromDepth = from.path.split('/').length
+      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    }
+  },
+  template: `
+    <div class="parent">
+      <h2>Parent</h2>
+      <transition :name="transitionName">
+        <router-view class="child-view"></router-view>
+      </transition>
+    </div>
+  `
+}
+
+const Default = { template: '<div class="default">default</div>' }
+const Foo = { template: '<div class="foo">foo</div>' }
+const Bar = { template: '<div class="bar">bar</div>' }
+
+const router = new VueRouter({
+  mode: 'history',
+//   base: __dirname,
+  routes: [
+    { path: '/', component: Home },
+    { path: '/parent', component: Parent,
+      children: [
+        { path: '', component: Default },
+        { path: 'foo', component: Foo },
+        { path: 'bar', component: Bar }
+      ]
+    }
+  ]
+})
+
+new Vue({
+  router,
+  template: `
+    <div id="app">
+      <h1>Transitions</h1>
+      <ul>
+        <li><router-link to="/">/</router-link></li>
+        <li><router-link to="/parent">/parent</router-link></li>
+        <li><router-link to="/parent/foo">/parent/foo</router-link></li>
+        <li><router-link to="/parent/bar">/parent/bar</router-link></li>
+      </ul>
+      <transition name="fade" mode="out-in">
+        <router-view class="view"></router-view>
+      </transition>
+    </div>
+  `
+}).$mount('#app')
+    </script>
+</body>
+
+</html>

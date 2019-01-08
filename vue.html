@@ -73,6 +73,18 @@
 
             <p slot="footer">Here's some contact info</p>
         </base-layout>
+
+        <h2>表单输入绑定</h2>
+        <div id="example-3">
+            <input type="checkbox" id="jack" value="jack" v-model="checkedNames">
+            <label for="jack">Jack</label>
+            <input type="checkbox" id="join" value="join" v-model="checkedNames">
+            <label for="join">Join</label>
+            <input type="checkbox" id="mike" value="mike" v-model="checkedNames">
+            <label for="mike">Mike</label>
+            <br>
+            <span>Checked names {{ checkedNames }}</span>
+        </div>
     </div>
 
     <script src="vue.min.js"></script>
@@ -156,7 +168,12 @@
             delimiters: ['${','}']
         })
 
-
+        new Vue({
+            el: '#example-3',
+            data: {
+                checkedNames: []
+            }
+        })
 
     </script>
 </body>

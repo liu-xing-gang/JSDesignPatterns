@@ -1,13 +1,10 @@
-// require(['moduleA', 'moduleB', 'moduleC'], function (moduleA, moduleB, moduleC){});
-require( ['jquery', 'math'], function($, math) {
-    $(function () {
-        $('h1').css('color', 'red')
-    })
+// // require(['moduleA', 'moduleB', 'moduleC'], function (moduleA, moduleB, moduleC){});
+// require(['jquery', 'math'], function ($, math) {
+//     $(function () {
+//         $('h1').css('color', 'red').append('<div>' + math.add(1, 1) + '</div>')
+//     })
+// });
 
-    alert(math.add(1,1))
-});
-
-require(['foo'], function (foo){
-    foo.foo()
-})
-
+// require(['foo'], function (foo) {
+//     foo.foo()
+// })

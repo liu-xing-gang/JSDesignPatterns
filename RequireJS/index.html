@@ -8,7 +8,17 @@
 </head>
 <body>
     <h1>Awsome require.js</h1>
-    <script data-main="scripts/main" src="scripts/require.js"></script>
+    <!-- <script data-main="scripts/main" src="scripts/require.min.js"></script>
+    <script src="scripts/config.js"></script> -->
+
+    <script src="scripts/require.min.js"></script>
     <script src="scripts/config.js"></script>
+    <script>
+    require(['jquery', 'math'], function ($, math) {
+        $(function () {
+            $('h1').css('color', 'red').append('<div>' + math.add(1, 1) + '</div>')
+        })
+    });
+    </script>
 </body>
 </html>

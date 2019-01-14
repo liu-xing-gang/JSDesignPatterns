@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="cssreset-min.css">
+    <script src="modernizr.js"></script>
+</head>
+
+<body>
+    <textarea name="" id="content" cols="30" rows="10" onchange="if(this.value === '') return false;this.value=this.value.substring(0, 15)"
+        onkeydown="if(this.value === '') return false;this.value=this.value.substring(0, 15)" onkeyup="if(this.value === '') return false;this.value=this.value.substring(0, 15)"></textarea>
+    <div class="num"></div>
+    <script src="jquery-1.10.2.min.js"></script>
+    <script>
+        $(function () {
+            var check = function (str, maxLength) {
+                var _n = new Number
+                if (str && str.length > maxLength) {
+                    _n = maxLength;
+                } else {
+                    _n = str.length;
+                }
+                return _n
+            }
+            $("#content").on('input propertychange', function (e) {
+                var length = check($(this).val(), 15)
+                $(".num").html(length + '/15');
+            });
+
+
+        })
+    </script>
+</body>
+
+</html>

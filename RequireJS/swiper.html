@@ -75,7 +75,21 @@
     require(['swiper'], function (Swiper) {
       var swiper = new Swiper('.swiper-container');
     });
+
+    require(['jquery'], function ($) {
+      console.log($('.swiper-container').html())
+    });
     // var swiper = new Swiper('.swiper-container');
+  </script>
+  <script>
+    (function (win) {
+      var Test = function () {}
+      Test.prototype.alert = function (str) {
+        alert(str)
+      }
+      win.test = new Test()
+    })(window);
+    test.alert(1)
   </script>
 </body>
 

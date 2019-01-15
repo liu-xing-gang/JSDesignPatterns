@@ -5,22 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>RequireJS</title>
+    <title>Document</title>
 </head>
 
 <body>
-    <h1>Awsome require.js</h1>
-    <!-- <script data-main="scripts/main" src="scripts/require.min.js"></script>
-    <script src="scripts/config.js"></script> -->
 
     <script src="scripts/require.min.js"></script>
     <script src="scripts/config.js"></script>
     <script>
-        require(['jquery', 'math'], function ($, math) {
+        // console.log(Base64.encode('dankogai'))
+
+        // require(['cookie'], function (Cookies) {
+        //     Cookies.set('a', '1')
+        // })
+
+        require(['jquery'], function ($) {
             $(function () {
-                $('h1').css('color', 'red').append('<div>' + math.add(1, 1) + '</div>')
+                $('body').append('111')
             })
-        });
+        })
     </script>
 </body>
 

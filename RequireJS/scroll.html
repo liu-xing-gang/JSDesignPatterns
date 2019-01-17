@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RequireJS</title>
+    <style>
+        #box {
+            width: 400px;
+            height: 300px;
+            border: 1px solid #333;
+            overflow: auto;
+        }
+
+        #content {
+            height: 2000px;
+            background-color: cyan;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="" id="box">
+        header
+        <div class="" id="content"></div>
+        footer
+    </div>
+    <button id="btn">回到顶部</button>
+
+    <script src="scripts/require.min.js"></script>
+    <script src="scripts/config.js"></script>
+    <script>
+        require(['jquery'], function ($) {
+            // (new Test1()).alert()
+            // new Cabinet('#test', {
+            //     capacity: 15
+            // })
+            $('#btn').on('click', function () {
+                $('#box').animate({
+                    scrollTop: 0
+                })
+                $('#box').scrollTop(
+                    0
+                );
+            })
+        })
+    </script>
+</body>
+
+</html>

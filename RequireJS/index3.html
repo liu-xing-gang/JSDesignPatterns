@@ -6,18 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RequireJS</title>
+    <link rel="stylesheet" href="cabinet.css">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+    <script src="https://cdn.bootcss.com/response.js/0.10.0/response.min.js"></script>
+    <![endif]-->
+
 </head>
 
 <body>
     <h1>Awsome require.js</h1>
-    <script data-main="scripts/main" src="scripts/require.min.js"></script>
+    <div id="test"></div>
+
+    <script src="scripts/base64.min.js"></script>
+    <script src="scripts/require.min.js"></script>
     <script src="scripts/config.js"></script>
     <script>
-        require(['jquery', 'math'], function ($, math) {
-            $(function () {
-                $('h1').css('color', 'red').append('<div>' + math.add(1, 1) + '</div>')
-            })
-        });
+        // 引入标准模块 （推荐）
+        // require(['test', 'math'], function (Test1, m) {
+        //     (new Test1).alert()
+        // })
+
+        // 为不修改已编写代码而使用
+        // require(['jquery'], function ($) {
+        //     require(['cabinet'], function () {
+        //         $('#test').cabinet()
+        //     })
+
+        //     // require(['test'], function (Test1) {
+        //     //     (new Test1).alert()
+        //     // })
+        // })
+
+        // 应该如何加载模块最科学？ layui
+        // 我们强烈推荐你在代码最外层把需要用到的模块先加载
+        // layui.use(['layer', 'form', 'element'], function () {
+        //     var layer = layui.layer,
+        //         form = layui.form,
+        //         element = layui.element
+
+        //     //……
+        //     //你的代码都应该写在这里面
+        // });
+
+        require(['lodash'], function () {
+            console.log(_.chunk(['a', 'b', 'c', 'd'], 3))
+        })
     </script>
 </body>
 

@@ -7,12 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="cssreset-min.css">
-    <!-- <script src="modernizr.js"></script> -->
+    <script src="modernizr.js"></script>
 </head>
 
 <body>
-    <textarea name="" id="content" cols="30" rows="10" onchange="this.value=this.value.substring(0, 15)" onkeydown="this.value=this.value.substring(0, 15)"
-        onkeyup="this.value=this.value.substring(0, 15)"></textarea>
+    <textarea name="" id="content" cols="30" rows="10"></textarea>
     <div class="num"></div>
     <script src="jquery-1.10.2.min.js"></script>
     <script>
@@ -26,7 +25,33 @@
                 }
                 return _n
             }
+
+            // if (this.value === '') return false;
+            // this.value = this.value.substring(0, 15)
+
+            // $("#content").on('keyup', function (e) {
+
+            // });
+
+            // $("#content").on('keydown', function (e) {
+
+            // });
+
+            // $("#content").on('change', function (e) {
+
+            // });
+
+
+
+
             $("#content").on('input propertychange', function (e) {
+
+                // if (this.value === '') return false;
+                // this.value = this.value.substring(0, 15)
+                var value = $(this).val().substring(0, 15)
+                $(this).val(value)
+
+
                 var length = check($(this).val(), 15)
                 $(".num").html(length + '/15');
             });

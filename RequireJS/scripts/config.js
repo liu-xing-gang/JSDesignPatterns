@@ -7,5 +7,9 @@ require.config({
         swiper: 'swiper.min',
         jquery: 'jquery-1.10.2.min',
         cookie: 'cookie.min',
+        cabinet: 'libs/cabinet',
+        alert: 'libs/alert',
+        base64: 'base64.min',
+        lodash: 'lodash.min'
     }
 })

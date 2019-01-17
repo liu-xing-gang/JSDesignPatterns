@@ -7,3 +7,11 @@ define(['jquery'], function ($) {
         foo: foo
     };
 });
+
+// define([
+//     'require',
+//     'dependency'
+// ], function(require, factory) {
+//     'use strict';
+    
+// });

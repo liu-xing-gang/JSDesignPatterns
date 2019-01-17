@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        header,
+        main,
+        footer,
+        nav {
+            border: 1px solid #333;
+        }
+
+        .main {
+            display: flex;
+        }
+
+        .content {
+            order: -1;
+        }
+
+        .example {
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer {
+            order: -1;
+        }
+
+        nav,
+        aside,
+        .content {
+            flex: 1;
+        }
+
+        /* 伪类 :root 等价于 html 选择器 */
+    </style>
+</head>
+
+<body>
+    <div class="example">
+        <header>
+            header content here
+        </header>
+        <main class="main">
+            <nav>
+                nav content here
+            </nav>
+            <div class="content">
+                main content here
+            </div>
+            <aside>
+                aside content here
+            </aside>
+        </main>
+        <footer>
+            footer content here
+        </footer>
+    </div>
+</body>
+
+</html>

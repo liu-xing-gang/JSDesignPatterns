@@ -25,3 +25,4 @@ yarn-error.log*
 *.mp4
 *.m3u8
 *.ts
+*.zip

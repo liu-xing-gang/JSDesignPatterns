@@ -14,7 +14,6 @@
 
         .test {
             width: 80%;
-            height: 2000px;
             margin: 0 auto;
             box-shadow: 0 0 8px #888;
         }
@@ -55,13 +54,29 @@
     <div style="height: 100px;">header</div>
     <nav id="nav"></nav>
     <div class="test">
-        content
+        <p>
+            节流概念(Throttle)<br />
+            按照设定的时间固定执行一次函数，比如200ms一次。注意：固定就是你在mousemove过程中，执行这个节流函数，它一定是200ms（你设定的定时器延迟时间）内执行一次。没到200ms，一定会返回，没有执行回调函数的。
+            <br />
+            主要应用场景有：scroll、touchmove
+        </p>
+        <p>
+            防抖概念(Debounce)<br />
+            抖动停止后的时间超过设定的时间时执行一次函数。注意：这里的抖动停止表示你停止了触发这个函数，从这个时间点开始计算，当间隔时间等于你设定时间，才会执行里面的回调函数。如果你一直在触发这个函数并且两次触发间隔小于设定时间，则一定不会到回调函数那一步。
+            <br>
+            主要应用场景有：input验证、搜索联想、resize
+        </p>
+        <div style="height: 800px;"></div>
+        <button class="btn">回到顶部</button>
+
+        <br>
+        <input type="text" id="input2"><button id="btn-2">防抖(防止重复触发操作)</button>
     </div>
     <script src="lodash.min.js"></script>
     <script src="jquery-1.10.2.min.js"></script>
     <script>
         var fasten = function () {
-            if (window.window.scrollY >= 144) {
+            if (window.scrollY >= 144) {
                 $('#nav').addClass('fixed')
                 setTimeout(function () {
                     $('#nav').addClass('active')
@@ -71,6 +86,18 @@
             $('#nav').removeClass('fixed active')
         }
         window.addEventListener('scroll', _.throttle(fasten, 100));
+        // window.addEventListener('scroll', _.debounce(fasten, 100));
+        // window.addEventListener('scroll', fasten);
+
+        $('.btn').on('click', function () {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 500)
+        })
+        var test = function () {
+            alert($('#input2').val())
+        }
+        $('#btn-2').on('click', _.debounce(test, 1000))
     </script>
 </body>
 

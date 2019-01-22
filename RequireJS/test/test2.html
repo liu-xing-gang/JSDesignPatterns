@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='test' style="width: 85%; height: 500px;"></div>
+    <script src="requirejs/require.min.js"></script>
+    <script src="requirejs/config.js"></script>
+    <script src="requirejs/config2.js"></script>
+    <script>
+        _appsite = '/ams/';
+        _staticsite = 'http://code.bianwoyou.cn/static/';
+        _imagesite = '/imgs/';
+    </script>
+    <script>
+        require(['jquery', 'easyui'], function ($) {
+            require([
+                'utils',
+                'cfg_header',
+                'amsmovablerack_manage',
+                'amsmovablerack_grid',
+                'amsstorage_grid',
+                'totemCabinet_cabinet',
+                'cabinet_contr',
+                'totemCabinet_cabinet',
+                'cfg'
+            ], function () {
+                $('#test').cabinet()
+            })
+        })
+    </script>
+</body>
+
+</html>

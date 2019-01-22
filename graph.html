@@ -1,12 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <h3>js实现图的DFS和BFS</h3>
+
+    <script>
+        // 表示顶点的数据结构
+        var Vertex = function () {
+            if (!(this instanceof(Vertex)))
+                return new Vertex()
+
+            // 初始为白色
+            this.color = this.WHITE
+
+            // 初始为无前驱
+            this.pi = null
+
+            // 初始距离
+            this.d = this.INFINITY
+
+            // 由顶点出发的所有边
+            this.edges = null
+
+            // 节点的值
+            this.value = null
+        }
+
+        Vertex.prototype = {
+            constructor: Vertex,
+            WHITE: 'white',
+            GRAY: 'gray',
+            BLACK: 'black',
+            INFINITY: null,
+        }
+
+        // 表示边的数据结构
+        var Edge = function () {
+            if (!(this instanceof Edge))
+                return new Edge()
+            this.index = null
+            this.sibling = null
+        }
+
+        // 图
+        var Graph = function () {
+            if (!(this instanceof Graph))
+                return new Graph()
+            this.vertexs = []
+        }
+        Graph.prototype = {
+            constructor: Graph,
+            addNode: function (node) {
+                this.vertexs.push(node)
+            },
+            getNode: function (index) {
+                return this.vertexs[index]
+            }
+        }
+
+        // 构建图
+        var vA = Vertex()
+        vB = Vertex(),
+            vC = Vertex(),
+            vD = Vertex(),
+            vE = Vertex(),
+            vF = Vertex();
+
+        vA.value = 'A'
+        vB.value = 'B'
+        vC.value = 'C'
+        vD.value = 'D'
+        vE.value = 'E'
+        vF.value = 'F'
+
+        // 构建由A结点出发的边集
+        var eA1 = Edge()
+        var eA2 = Edge()
+        eA1.index = 1
+        eA2.index = 3
+        eA1.sibling = eA2
+        vA.edges = eA1
+
+        // 构建由B结点出发的边集
+        var eB1 = Edge()
+        var eB2 = Edge()
+        var eB3 = Edge()
+        eB1.index = 0
+        eB2.index = 4
+        eB3.index = 2
+        eB1.sibling = eB2
+        eB2.sibling = eB3
+        vB.edges = eB1
+
+        //构建由 C 节点发出的边
+        var eC1 = Edge();
+        var eC2 = Edge();
+        var eC3 = Edge();
+        eC1.index = 1;
+        eC2.index = 4;
+        eC3.index = 5;
+        eC1.sibling = eC2;
+        eC2.sibling = eC3;
+        vC.edges = eC1;
+
+        //构建由 D 节点发出的边
+        var eD1 = Edge();
+        eD1.index = 0;
+        vD.edges = eD1;
+
+        //构建由 E 节点发出的边
+        var eE1 = Edge();
+        var eE2 = Edge();
+        var eE3 = Edge();
+        eE1.index = 1;
+        eE2.index = 2;
+        eE3.index = 5;
+        eE1.sibling = eE2;
+        eE2.sibling = eE3;
+        vE.edges = eE1;
+
+        //构建由 F 节点发出的边
+        var eF1 = Edge();
+        var eF2 = Edge();
+        eF1.index = 2;
+        eF2.index = 4;
+        eF1.sibling = eF2;
+        vF.edges = eF1;
+
+        //构建图
+        var g = Graph();
+        g.addNode(vA);
+        g.addNode(vB);
+        g.addNode(vC);
+        g.addNode(vD);
+        g.addNode(vE);
+        g.addNode(vF);
+
+        // BFS
+        var BFS = function (g, s) {
+            var queue = []
+            s.color = s.GRAY
+            s.d = 0
+            queue.push(s)
+            while (queue.length > 0) {
+                var u = queue.shift()
+                if (u.edges == null) continue
+                var sibling = u.edges
+                while (sibling != null) {
+                    var index = sibling.index
+                    var n = g.getNode(index)
+                    if (n.color == n.WHITE) {
+                        n.color = n.GRAY
+                        n.d = u.d + 1
+                        n.pi = u
+                        queue.push(n)
+                    }
+                    sibling = sibling.sibling
+                }
+                u.color = u.BLACK
+                console.log(u)
+            }
+        }
+
+        // 调用BFS
+        console.log('BFS:', '------')
+        BFS(g, vB)
+
+        var DFS = function (g) {
+            var t = 0
+            var DFSVisit = function (g, v) {
+                t++
+                v.d = t
+                v.color = v.GRAY
+                var sibling = v.edges
+                while (sibling != null) {
+                    var index = sibling.index
+                    var n = g.getNode(index)
+                    if (n.color == n.white) {
+                        n.pi = v
+                        DFSVisit(g, n)
+                    }
+                    sibling = sibling.sibling
+                }
+                v.color = v.BLACK
+                t++
+                v.f = t
+                console.log(v)
+            }
+            for (var v of g.vertexs) {
+                if (v.color === v.WHITE)
+                    DFSVisit(g, v)
+            }
+
+
+        }
+
+        function Graph() {
+            if (!(this instanceof Graph))
+                return new Graph();
+            this.vertexs = [];
+        }
+        console.log('DFS:', '------')
+        // 调用DFS
+        DFS(g)
+    </script>
 </body>
+
 </html>

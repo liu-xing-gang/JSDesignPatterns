@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,
+        li {
+            list-style: none;
+        }
+
+        /* display: block,inline-block,inline,flex,grid,table */
+        .grid {
+            display: grid;
+            grid-template-columns: 100px 100px 100px;
+            grid-template-rows: 100px 100px 100px;
+        }
+
+        .grid li:nth-child(odd) {
+            background-color: cyan;
+        }
+
+        .grid li {
+            border: 1px dashed #333;
+        }
+
+        .item1 {
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+
+        .item3 {
+            grid-row-start: 2;
+            grid-row-end: 4;
+        }
+
+        .item4 {
+            grid-column-start: 2;
+            grid-column-end: 4;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="grid">
+        <li class="item1">1</li>
+        <li>2</li>
+        <li class="item3">3</li>
+        <li class="item4">4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+</body>
+
+</html>

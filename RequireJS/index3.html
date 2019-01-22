@@ -2,57 +2,97 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>RequireJS</title>
-    <link rel="stylesheet" href="cabinet.css">
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
-    <script src="https://cdn.bootcss.com/response.js/0.10.0/response.min.js"></script>
-    <![endif]-->
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="swiper/swiper.min.css">
 
+  <!-- Demo styles -->
+  <style>
+    html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+  </style>
 </head>
 
 <body>
-    <h1>Awsome require.js</h1>
-    <div id="test"></div>
+  <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      <div class="swiper-slide">Slide 4</div>
+      <div class="swiper-slide">Slide 5</div>
+      <div class="swiper-slide">Slide 6</div>
+      <div class="swiper-slide">Slide 7</div>
+      <div class="swiper-slide">Slide 8</div>
+      <div class="swiper-slide">Slide 9</div>
+      <div class="swiper-slide">Slide 10</div>
+    </div>
+  </div>
+<h1>test</h1>
+  <!-- <script src="scripts/swiper.min.js"></script> -->
+  <script src="scripts/require.min.js"></script>
+  <script src="scripts/config.js"></script>
+  <script>
+    require(['swiper'], function (Swiper) {
+      var swiper = new Swiper('.swiper-container');
+    });
 
-    <script src="scripts/base64.min.js"></script>
-    <script src="scripts/require.min.js"></script>
-    <script src="scripts/config.js"></script>
-    <script>
-        // 引入标准模块 （推荐）
-        // require(['test', 'math'], function (Test1, m) {
-        //     (new Test1).alert()
-        // })
+    require(['jquery'], function ($) {
+      console.log($('.swiper-container').html())
+    });
 
-        // 为不修改已编写代码而使用
-        // require(['jquery'], function ($) {
-        //     require(['cabinet'], function () {
-        //         $('#test').cabinet()
-        //     })
-
-        //     // require(['test'], function (Test1) {
-        //     //     (new Test1).alert()
-        //     // })
-        // })
-
-        // 应该如何加载模块最科学？ layui
-        // 我们强烈推荐你在代码最外层把需要用到的模块先加载
-        // layui.use(['layer', 'form', 'element'], function () {
-        //     var layer = layui.layer,
-        //         form = layui.form,
-        //         element = layui.element
-
-        //     //……
-        //     //你的代码都应该写在这里面
-        // });
-
-        require(['lodash'], function () {
-            console.log(_.chunk(['a', 'b', 'c', 'd'], 3))
-        })
-    </script>
+    
+    // var swiper = new Swiper('.swiper-container');
+  </script>
+  <script>
+    (function (win) {
+      var Test = function () {}
+      Test.prototype.alert = function (str) {
+        alert(str)
+      }
+      win.test = new Test()
+    })(window);
+    test.alert(1)
+  </script>
 </body>
 
 </html>

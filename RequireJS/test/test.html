@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="http://code.bianwoyou.cn/static/assets/totem/plugins/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="http://code.bianwoyou.cn/static/assets/totem/plugins/easyui/themes/icon.css" />
+</head>
+
+<body>
+    <iframe src="test2.html" frameborder="0" style="width: 800px; height: 600px; " border="no"></iframe>
+    <script src="requirejs/require.min.js"></script>
+    <script src="requirejs/config.js"></script>
+    <script>
+        _appsite = '/ams/';
+        _staticsite = 'http://code.bianwoyou.cn/static/';
+        _imagesite = '/imgs/';
+    </script>
+    <script>
+        require(['jquery', 'easyui'], function ($) {
+            require([
+                'easyui_lang_zh_CN',
+                'jquery_cookie',
+                'moment',
+                'utils',
+                'webuploader',
+                'uploadercommon',
+                'jquery_poshytip',
+                'syExtEasyUI',
+                'syExtJquery',
+                'form2json',
+                'gallery_introtour_ui_jq',
+                'common'
+            ])
+        })
+    </script>
+</body>
+
+</html>

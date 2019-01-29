@@ -66,8 +66,8 @@
         }
 
         // 构建图
-        var vA = Vertex()
-        vB = Vertex(),
+        var vA = Vertex(),
+            vB = Vertex(),
             vC = Vertex(),
             vD = Vertex(),
             vE = Vertex(),
@@ -174,26 +174,27 @@
         BFS(g, vB)
 
         var DFS = function (g) {
-            var t = 0
-            var DFSVisit = function (g, v) {
-                t++
-                v.d = t
-                v.color = v.GRAY
-                var sibling = v.edges
-                while (sibling != null) {
-                    var index = sibling.index
-                    var n = g.getNode(index)
-                    if (n.color == n.white) {
-                        n.pi = v
-                        DFSVisit(g, n)
+            var t = 0,
+                DFSVisit = function (g, v) {
+                    t++
+                    v.d = t
+                    v.color = v.GRAY
+                    var sibling = v.edges
+                    while (sibling != null) {
+                        var index = sibling.index
+                        var n = g.getNode(index)
+                        if (n.color == n.white) {
+                            n.pi = v
+                            DFSVisit(g, n)
+                        }
+                        sibling = sibling.sibling
                     }
-                    sibling = sibling.sibling
-                }
-                v.color = v.BLACK
-                t++
-                v.f = t
-                console.log(v)
-            }
+                    v.color = v.BLACK
+                    t++
+                    v.f = t
+                    console.log(v)
+                };
+                
             for (var v of g.vertexs) {
                 if (v.color === v.WHITE)
                     DFSVisit(g, v)

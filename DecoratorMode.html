@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>装饰者模式</h2>
+
+
+    <script>
+        var extend = function (subClass, superClass) {
+            var F = function () {}
+            F.prototype = superClass.prototype
+            subClass.prototype = new F()
+            subClass.prototype.constructor = subClass
+        }
+
+        var AcmeComfortCruiser = function () {}
+        AcmeComfortCruiser.prototype = {
+            assemble: function () {
+                return this.bicycle.assemble()
+            },
+            wash: function () {
+                return this.bicycle.wash()
+            },
+            ride: function () {
+                return this.bicycle.ride()
+            },
+            repair: function () {
+                return this.bicycle.repair()
+            },
+            getPrice: function () {
+                return 399.00
+            }
+        }
+
+        // 所有选件类的超类
+        var BicycleDecorator = function (bicycle) {
+            this.bicycle = bicycle
+        }
+        BicycleDecorator.prototype = {
+            assemble: function () {
+                return this.bicycle.assemble()
+            },
+            wash: function () {
+                return this.bicycle.wash()
+            },
+            ride: function () {
+                return this.bicycle.ride()
+            },
+            repair: function () {
+                return this.bicycle.repair()
+            },
+            getPrice: function () {
+                return 399.00
+            }
+        }
+
+        var HeadlightDecorator = function (bicycle) {
+            BicycleDecorator.call(this, bicycle)
+        }
+        extend(HeadlightDecorator, BicycleDecorator)
+        HeadlightDecorator.prototype = {
+            assemble: function () {
+                return this.bicycle.assemble() + ' Attach headlight to handlebars'
+            },
+            getPrice: function () {
+                return this.bicycle.getPrice() + 15.00
+            }
+        }
+
+        // 调用1
+        var myBicycle = new AcmeComfortCruiser()
+        myBicycle = new HeadlightDecorator(myBicycle)
+        console.log(myBicycle.getPrice())
+
+        var TaillightDecorator = function (bicycle) {
+            BicycleDecorator.call(this, bicycle)
+        }
+        extend(TaillightDecorator, BicycleDecorator)
+        TaillightDecorator.prototype = {
+            assemble: function () {
+                return this.bicycle.assemble() + ' Attach taillight to the seat post'
+            },
+            getPrice: function () {
+                return this.bicycle.getPrice() + 9.00
+            }
+        }
+
+        // 调用2
+        myBicycle = new TaillightDecorator(myBicycle)
+        console.log('Price: ', myBicycle.getPrice())
+    </script>
+</body>
+
+</html>

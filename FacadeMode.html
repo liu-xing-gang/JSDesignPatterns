@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>门面模式</h2>
+    <pre>
+        1.简化类的接口
+        2.消除类与使用它的客户代码之间的耦合
+        例如：
+        电脑桌面快捷方式，事件监听
+        var addEvent = function (oElement, sEventType, fnHandler) {
+            return oElement.addEventListener ? 
+                oElement.addEventListener(sEventType, fnHandler, false) : 
+                oElement.attachEvent("on" + sEventType, fnHandler)
+        };
+
+        在处理跨浏览器开发时，最好创建一些门面函数
+    </pre>
+
+    <script>
+        // 例1
+        var DED = window.DED || {}
+        DED.util = {
+            stopPropagation: function (e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation()
+                } else {
+                    e.cancelBubble = true
+                }
+            },
+            preventDefault: function (e) {
+                if (e.preventDefault) {
+                    e.preventDefault()
+                } else {
+                    e.returnValue = false
+                }
+            },
+            stopEvent: function (e) {
+                this.stopPropagation(e)
+                this.preventDefault(e)
+            }
+        }
+
+        // 例2
+        // setStyle(['a', 'b', 'c'], 'color', 'red')
+        // setCss(['foo'], {
+        //     position: 'absolute',
+        //     top: '50px',
+        //     left: '300px'
+        // })
+        var setStyle = function (els, prop, val) {
+                for (var i = 0; i < els.length; i++) {
+                    document.getElementById(els[i]).style[prop] = val
+                }
+            },
+            setCss = function (el, styles) {
+                for (var prop in styles) {
+                    if (!styles.hasOwnProperty(prop)) continue
+                    setStyle(el, prop, styles[prop])
+                }
+            };
+    </script>
+</body>
+
+</html>

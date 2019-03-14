@@ -11,11 +11,19 @@
 </head>
 
 <body>
-    <textarea name="" id="content" cols="30" rows="10" onchange="this.value=this.value.substring(0, 15)" onkeydown="this.value=this.value.substring(0, 15)"
-        onkeyup="this.value=this.value.substring(0, 15)"></textarea>
-    <div class="num"></div>
+    <!-- <textarea name="" id="content" cols="30" rows="10"></textarea>
+    <div class="num"></div> -->
+    
+    <textarea class="weui_textarea" onkeyup="wordStatic(this);" maxlength="20" id="studyIdea" placeholder="请填写您的培训收获！" rows="3"></textarea>
+    <div class="weui_textarea_counter"><span id="num">0</span>/20</div>
+
+        
     <script src="jquery-1.10.2.min.js"></script>
     <script>
+        // onchange="this.value=this.value.substring(0, 15)" 
+        // onkeydown="this.value=this.value.substring(0, 15)"
+        // onkeyup="this.value=this.value.substring(0, 15)"
+
         $(function () {
             var check = function (str, maxLength) {
                 var _n = new Number
@@ -33,6 +41,19 @@
 
 
         })
+
+        function wordStatic(input) {
+            // 获取要显示已经输入字数文本框对象
+            var content = document.getElementById('num');
+            if (content && input) {
+                // 获取输入框输入内容长度并更新到界面
+                var value = input.value;
+                // 将换行符不计算为单词数
+                value = value.replace(/\n|\r/gi,"");
+                // 更新计数
+                content .innerText = value.length;
+            }
+        }
     </script>
 </body>
 

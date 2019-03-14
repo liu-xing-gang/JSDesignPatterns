@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script src="jquery-1.10.2.min.js"></script>
     <script>
-        var f1 = function () {
+        // var f1 = function () {
 
-        }
+        // }
 
-        var f2 = function () {}
-        $.when(f1()).then(function (res1) {
-            var a = '1'
+        // var f2 = function () {}
+        // $.when(f1()).then(function (res1) {
+        //     var a = '1'
 
-            $.when(f2()).then(function (res2) {
-                
-            })
+        //     $.when(f2()).then(function (res2) {
+
+        //     })
+        // })
+        $.ajax({
+            type: 'GET',
+            url: '/test',
+            data: {
+                a: 1,
+                b: 1
+            },
+            success: function (res) {
+
+            }
         })
     </script>
 </body>
+
 </html>

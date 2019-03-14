@@ -1,16 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    <button type="button" class="btn">test</button>
     <script src="jquery-1.10.2.min.js"></script>
     <script>
-        $('body').append("<ul style='padding-top:80px;'><li style='color:#4aef23;display: inline-block; *display: inline; *zoom: 1;font-size:22px;'>委托阶段</li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;'>— — —></li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;font-size:22px;'>排程阶段</li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;'>— — —></li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;font-size:22px;'>试验阶段</li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;'>— — —></li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;font-size:22px;'>报告阶段</li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;'>— — —></li><li style='color:#b2b5b2;display: inline-block; *display: inline; *zoom: 1;font-size:22px;'>试验已完成</li></ul>")
+        $(document).ready(function () {
+            $('#mainTabs').tabs('addIframeTab', {
+                //tab参数为一对象，其属性同于原生add方法参数
+                tab: {
+                    fit: true,
+                    title: '我的工作台',
+                    closable: false,
+                    border: false
+                },
+                iframe: {
+                    src: '/ams//personal/myworkview'
+                }
+            });
+            $('#mainTabs').tabs('addEventParam');
+            // var tourCards = $.totemUtils.getJson("tour/getTourGuide/common_index", "get");
+            // if (tourCards) {
+            //     var existsCards = new Array();
+            //     $.each(tourCards, function (index, card) {
+            //         if ($("#" + card.target).length > 0 || card.target == "welcome" || card.target ==
+            //             "end") {
+            //             existsCards.push(card);
+            //         }
+            //     })
+            //     $().introTour(existsCards);
+
+            //     document.addEventListener('introTourClosed', function (e) {
+            //         $.each($("[name='close-nav']"), function () {
+            //             if ($(this).is(":checked")) {
+            //                 $.tourGuide.closeTour = true;
+            //             }
+            //         })
+            //         if ($.tourGuide.closeTour) {
+            //             $.totemUtils.getJson("tour/closeTourGuide/common_index", "get");
+            //         }
+            //     });
+
+            //     document.addEventListener('introTourLastCard', function (e) {
+            //         console.log('last card');
+            //     });
+            // }
+            $.ajax({
+                type: 'GET',
+                url: 'tour/getTourGuide/common_index',
+                success: function (res) {
+                    var tourCards = res
+                    var existsCards = new Array();
+                    $.each(tourCards, function (index, card) {
+                        if ($("#" + card.target).length > 0 || card.target == "welcome" ||
+                            card.target ==
+                            "end") {
+                            existsCards.push(card);
+                        }
+                    })
+
+                    $().introTour(existsCards);
+
+                    $(document).on('introTourClosed', function (e) {
+                        $.each($("[name='close-nav']"), function () {
+                            if ($(this).is(":checked")) {
+                                $.tourGuide.closeTour = true;
+                            }
+                        })
+                        if ($.tourGuide.closeTour) {
+                            $.get("tour/closeTourGuide/common_index")
+                        }
+                    });
+
+                    $(document).on('introTourLastCard', function (e) {
+                        console.log('last card');
+                    });
+                }
+            })
+
+        });
     </script>
 </body>
+
 </html>

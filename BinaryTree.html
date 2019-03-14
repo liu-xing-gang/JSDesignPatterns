@@ -145,8 +145,6 @@
                 };
                 return removeNode(this.root, data)
             }
-
-
         }
 
         //创建BST
@@ -166,12 +164,13 @@
         tree.insert(25);
         console.log(tree);
         // console.log(tree.root);
-        // //中序遍历BST
-        // console.log(tree.inOrder());
-        // //前序遍历BST
-        // console.log(tree.preOrder());
-        // //后序遍历BST
-        // console.log(tree.postOrder());
+
+        //前序遍历BST
+        console.log('前序遍历: ', tree.preOrder());
+        //中序遍历BST
+        console.log('中序遍历: ', tree.inOrder());
+        //后序遍历BST
+        console.log('后序遍历: ', tree.postOrder());
         // //搜索最小值
         // console.log(tree.getMin());
         // //搜索最大值

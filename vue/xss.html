@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style> -->
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <input type="text" value="">
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+    </div>
+ 
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+        var replaceStr = function (o) {
+            var reg=/(\<script\>)|(\<\/script\>)/g
+            o.val(o.val().toLowerCase().replace(reg, ''))
+        }
+        
+        $("input, textarea").on("input propertychange",function(){
+            // 防止ie8 stack overflow
+            if($.syncProcessSign) return 
+            $.syncProcessSign = true
+            replaceStr($(this))
+            $.syncProcessSign = false
+        });
+
+       
+    </script>
+</body>
+
+</html>

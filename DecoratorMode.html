@@ -13,12 +13,30 @@
 
 
     <script>
+        // 原型继承
         var extend = function (subClass, superClass) {
             var F = function () {}
             F.prototype = superClass.prototype
             subClass.prototype = new F()
             subClass.prototype.constructor = subClass
         }
+
+        // 类式继承
+        var father = function () {
+            this.age = 52;
+            this.say = function () {
+                alert('hello i am ' + this.name + ' and i am ' + this.age + 'years old');
+            }
+        }
+
+        var child = function () {
+            father.call(this);
+            this.name = 'bill';
+            this.age = 18
+        }
+
+        var man = new child();
+        man.say();
 
         var AcmeComfortCruiser = function () {}
         AcmeComfortCruiser.prototype = {

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://caibaojian.com/demo/2018/3/scroll3.html -->
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+      .content,
+      .outer-container {
+        width: 230px;
+        height: 600px;
+      }
+
+      .outer-container {
+        /* border: 5px solid purple; */
+        box-shadow: 0 0 8px #888;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .inner-container {
+        position: absolute;
+        left: 0;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+
+      .inner-container::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <div class="outer-container">
+      <div class="inner-container">
+        <div class="content">
+          <div style="background: red; width: 400px; height: 400px;"></div>
+          <div style="background: blue; width: 400px; height: 400px;"></div>
+          <div style="background: green; width: 400px; height: 800px;"></div>
+          <div style="background: black; width: 400px; height: 200px;"></div>
+          <div>111</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(window).on("load", function() {
+        $(".outer-container, .content").height($(window).height());
+      });
+      $(window).on("resize", function() {
+        $(".outer-container, .content").height($(window).height());
+      });
+    </script>
+  </body>
+</html>

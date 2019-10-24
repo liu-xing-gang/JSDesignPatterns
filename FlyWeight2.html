@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>享元模式</h2>
+    <script>
+        // // 例子：某商家有 50 种男款内衣和 50 种款女款内衣，要展示它们
+
+        // /**
+        //  * 一.造 50 个塑料男模和 50 个塑料女模
+        //  */ 
+        // var Model = function (gender, underwear) {
+        //     this.gender = gender;
+        //     this.underwear = underwear;
+        // }
+
+        // Model.prototype.takePhoto = function () {
+        //     console.log(`${this.gender}穿着${this.underwear}`)
+        // }
+
+        // for (let i = 1; i < 51; i++) {
+        //     const maleModel = new Model('male', `第${i}款衣服`)
+        //     maleModel.takePhoto()
+        // }
+
+        // for (let i = 1; i < 51; i++) {
+        //     const female = new Model('female', `第${i}款衣服`)
+        //     female.takePhoto()
+        // }
+
+        // /**
+        //  * 二.造 1 个塑料男模特 1 个塑料女模特，分别试穿 50 款内衣
+        //  */ 
+        // const Model = function (gender) {
+        //     this.gender = gender;
+        // }
+        // Model.prototype.takephoto = function() {
+        //     console.log(`${this.gender}穿着${this.underwear}`)
+        // }
+        // const maleModel = new Model('male')
+        // const femaleModel = new Model('female')
+        // for (let i = 1; i < 51; i++) {
+        //     maleModel.underwear = `第${i}款衣服`
+        //     maleModel.takephoto()
+        // }
+
+        // for (let i = 1; i < 51; i++) {
+        //     femaleModel.underwear = `第${i}款衣服`
+        //     femaleModel.takephoto()
+        // }
+
+        const Model = function(gender) {
+  this.gender = gender
+}
+
+Model.prototype.takephoto = function() {
+  console.log(`${this.gender}穿着${this.underwear}`)
+}
+
+const modelFactory = (function() { // 优化第一点
+  const modelGender = {}
+  return {
+    createModel: function(gender) {
+      if (modelGender[gender]) {
+        return modelGender[gender]
+      }
+      return modelGender[gender] = new Model(gender)
+    }
+  }
+}())
+
+const modelManager = (function() {
+  const modelObj = {}
+  return {
+    add: function(gender, i) {
+      modelObj[i] = {
+        underwear: `第${i}款衣服`
+      }
+      return modelFactory.createModel(gender)
+    },
+    copy: function(model, i) { // 优化第二点
+      model.underwear = modelObj[i].underwear
+    }
+  }
+}())
+
+for (let i = 1; i < 51; i++) {
+  const maleModel = modelManager.add('male', i)
+  modelManager.copy(maleModel, i)
+  maleModel.takephoto()
+}
+
+for (let i = 1; i < 51; i++) {
+  const femaleModel = modelManager.add('female', i)
+  modelManager.copy(femaleModel, i)
+  femaleModel.takephoto()
+}
+    </script>
+</body>
+</html>

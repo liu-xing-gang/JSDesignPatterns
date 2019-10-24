@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //     var CreateDiv = function (html) {
+    //     this.html = html;
+    //     this.init();
+    // };
+    
+    // CreateDiv.prototype.init = function () {
+    //     var div = document.createElement('div');
+    //     div.innerHTML = this.html;
+    //     document.body.appendChild(div);
+    // };
+    
+    // var ProxySingletonCreateDiv = (function () {
+    //     var instance;
+    //     return function (html) {
+    //         if (!instance) {
+    //             instance = new CreateDiv(html);
+    //         }
+    //         return instance;
+    //     }
+    // })();
+    
+    // var a = new ProxySingletonCreateDiv('sven1');
+    // var b = new ProxySingletonCreateDiv('sven2');
+
+    // console.log(a === b)
+
+
+    //单例模式抽象，分离创建对象的函数和判断对象是否已经创建
+    var getSingle = function (fn) {
+        var result;
+        return function () {
+            return result || ( result = fn.apply(this, arguments) );
+        }
+    };
+    </script>
+</body>
+</html>

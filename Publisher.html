@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h4>观察者模式又称“发布-订阅（Publish/Subscribe）模式”</h4>
+    <script>
+        var Publisher = function () {
+            var state = new String()
+            this.observers = []
+
+            this.getState = function () {
+                return state
+            }
+
+            this.setState = function (value) {
+                state = value
+                this.notice()
+            }
+        }
+
+        Publisher.prototype.addOb = function (observer) {
+            var flag = false
+            this.observers.filter(function (currentValue, index, arr) {
+                flag = currentValue === observer ? true : false
+            })
+            if (!flag)
+                this.observers.push(observer)
+
+            return this
+        }
+
+        Publisher.prototype.removeOb = function (observer) {
+            var _this = this
+            this.observes.forEach(function (currentValue, index, arr) {
+                currentValue === observer ? _this.observes.splice(i, 1) : null
+            })
+        }
+
+        Publisher.prototype.notice = function () {
+            var _this = this
+            this.observers.map(function (currentValue, index, arr) {
+                // 获取发布者的内容
+                currentValue.update(_this.getState())
+            })
+        }
+
+        // 订阅者
+        var Subscribe = function () {
+            // 类方法
+            this.update = function (data) {
+                console.log(data)
+            }
+        }
+
+        // 调用
+        var oba = new Subscribe(),
+            obb = new Subscribe(),
+            pba = new Publisher();
+
+        pba.addOb(oba)
+        pba.addOb(obb)
+
+        oba.update = function (state) {
+            console.log(state + 'hello!')
+        }
+
+        obb.update = function (state) {
+            console.log(state + 'world!')
+        }
+
+        // 发布者更新了内容
+        pba.setState('open ')
+    </script>
+</body>
+
+</html>

@@ -10,6 +10,91 @@
 
 <body>
     <h2>适配器模式</h2>
+    <pre>
+        适配器模式（Adapter）是将一个类（对象）的接口（方法或属性）转化成客户希望的另外一个接口（方法或属性），
+        适配器模式使得原本由于接口不兼容而不能一起工作的那些类（对象）可以一些工作。速成包装器（wrapper）。
+    </pre>
+    <pre>
+        我们来举一个例子，鸭子（Dock）有飞（fly）和嘎嘎叫（quack）的行为，而火鸡虽然也有飞（fly）的行为，但是其叫声是咯咯的（gobble）
+        。如果你非要火鸡也要实现嘎嘎叫（quack）这个动作，那我们可以复用鸭子的quack方法，但是具体的叫还应该是咯咯的，
+        此时，我们就可以创建一个火鸡的适配器，以便让火鸡也支持quack方法，其内部还是要调用gobble。
+    </pre>
+
+
+    <script>
+        /*
+         * 1.先定义鸭子和火鸡的抽象行为
+         */
+        var Duck = function () {}
+        Duck.prototype.fly = function () {
+            throw new Error('该方法必须被重写!')
+        }
+
+        var Turkey = function () {}
+        Turkey.prototype.fly = function () {
+            throw new Error('该方法必须被重写!')
+        }
+
+        /*
+         * 2.然后再定义具体的鸭子和火鸡的构造函数
+         */
+        var MallardDuck = function () {
+            Duck.apply(this)
+        }
+        MallardDuck.prototype = new Duck()
+        MallardDuck.prototype.fly = function () {
+            console.log('can fly long distance')
+        }
+        MallardDuck.prototype.quack = function () {
+            console.log('嘎嘎！')
+        }
+
+        var WildTurkey = function () {
+            Turkey.apply(this)
+        }
+        WildTurkey.prototype = new Turkey()
+        WildTurkey.prototype.fly = function () {
+            console.log('can fly little distance!')
+        }
+        WildTurkey.prototype.gobble = function () {
+            console.log('咯咯！')
+        }
+
+        /*
+         * 创建了一个新的火鸡适配器TurkeyAdapter
+         */
+        var TurkeyAdapter = function (oTurkey) {
+            Duck.apply(this)
+            this.oTurkey = oTurkey
+        }
+        TurkeyAdapter.prototype = new Duck
+        TurkeyAdapter.prototype.quack = function () {
+            this.oTurkey.gobble()
+        }
+        TurkeyAdapter.prototype.fly = function () {
+            for (var nFly = 0, nLenFly = 5; nFly < nLenFly;) {
+                this.oTurkey.fly();
+                nFly = nFly + 1;
+            }
+        }
+
+        // 调用
+        var oMallardDuck = new MallardDuck,
+            oWildTurkey = new WildTurkey,
+            oTurkeyAdapter = new TurkeyAdapter(oWildTurkey);
+
+        // 原有鸭子的行为
+        oMallardDuck.fly()
+        oMallardDuck.quack()
+
+        //原有的火鸡行为
+        oWildTurkey.fly();
+        oWildTurkey.gobble();
+
+        //适配器火鸡的行为（火鸡调用鸭子的方法名称）
+        oTurkeyAdapter.fly();
+        oTurkeyAdapter.quack();
+    </script>
 </body>
 
 </html>

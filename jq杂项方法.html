@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h4>jq杂项方法</h4>
+    <pre>
+        data()
+        each()
+        get()
+        index()
+        $.noConflict()
+        $.param()
+        removeData()
+        size()
+        toArray()
+        pushStack()
+        $.when()
+    </pre>
+
+    <h4>jQuery实用工具</h4>
+    <pre>
+        $.contains()
+        $.each() 和$.map()的区别
+        $.each([1,2,3],function (index, value) {console.log(index, value)})
+        $.each({a:1, b:2, c:3},function (key, value) {console.log(key, value)})
+
+        $.map([1,2,3],function (value, index) {console.log(value, index})
+        $.map({a:1, b:2, c:3},function (value, index) {console.log(value, index})
+
+        $.extend()
+        // $.extend( [deep ], target, object1 [, objectN ] )
+
+        $.fn.extend()
+        --为jQuery扩展一个或多个实例属性和方法(主要用于扩展方法)
+
+        $.globalEval()
+        $.grep()
+        --函数使用指定的函数过滤数组中的元素，并返回过滤后的数组类似原生的filter
+        var arr = [ 1, 9, 3, 8, 6, 1, 5, 9, 4, 7, 3, 8, 6, 9, 1 ];
+        $( "div" ).text( arr.join( ", " ) );
+        arr = jQuery.grep(arr, function( n, i ) {
+        return ( n !== 5 && i > 4 );
+        });
+
+
+        $.inArray()
+        --在数组中查找指定值并返回它的索引值（如果没有找到，则返回-1）
+        var arr = [ 4, "Pete", 8, "John" ];
+        var $spans = $( "span" );
+        $spans.eq( 0 ).text( jQuery.inArray( "John", arr ) );
+        $spans.eq( 1 ).text( jQuery.inArray( 4, arr ) );
+        $spans.eq( 2 ).text( jQuery.inArray( "Karl", arr ) );
+        $spans.eq( 3 ).text( jQuery.inArray( "Pete", arr, 2 ) );
+
+
+
+        $.isArray()
+        --$.isArray()函数用于判断指定参数是否是一个数组。
+
+        $.isEmptyObject()
+        --检查对象是否为空（不包含任何属性）
+
+        $.isFunction()
+        --函数用于判断指定参数是否是一个函数
+
+        $.isNumeric()
+        $.isPlainObject()
+        --判断指定参数是否是一个纯粹的对象
+        
+        $.isPlainObject({})
+
+
+
+        $.isWindow()
+        $.isXMLDoc()
+        $.makeArray()
+        --函数用于将一个类似数组的对象转换为真正的数组对象。
+        var elems = document.getElementsByTagName("div"); // 返回一个节点列表
+        var arr = jQuery.makeArray(elems);
+        arr.reverse(); //对列表的元素使用一个数组方法
+        $(arr).appendTo(document.body);
+
+
+
+        $.map()
+        --函数用于使用指定函数处理数组中的每个元素(或对象的每个属性)，并将处理结果封装为新的数组返回
+        var arr = [ "a", "b", "c", "d", "e" ];
+        $("div").text(arr.join(", "));
+        arr = $.map(arr, function(n, i){
+        return (n.toUpperCase() + i);
+        });
+        $("p").text(arr.join(", "));
+        arr = $.map(arr, function (a) {
+        return a + a;
+        });
+        $("span").text(arr.join(", "));
+
+
+        $.merge()
+        --合并两个数组内容到第一个数组
+        var arr = $.merge([0,1,2], [2,3,4])
+
+
+        $.noop()
+        $.now()
+        --函数用于返回当前时间距1970年1月1日午夜所经过的毫秒数
+
+        $.parseHTML()
+        --将HTML字符串解析为对应的DOM节点数组
+        var $log = $( "#log" ),
+        str = "hello, <b>my name is</b> jQuery.",
+        html = $.parseHTML( str ),
+        nodeNames = [];
+        //添加已解析的HTML
+        $log.append( html );
+
+        $.parseJSON()
+        --函数用于将符合标准格式的的JSON字符串转为与之对应的JavaScript对象 === JSON.parse()
+
+        $.parseXML()
+        $.trim()
+        $.type()
+        --函数用于确定JavaScript内置对象的类型，并返回小写形式的类型名称
+        $.type([]) array
+
+        $.unique()
+        $.uniqueSort()
+        $.data()   =>$(selector).data(k, va)  $(selector).data(k)
+        --函数用于在指定的元素上存取数据，返回设置值。
+        $.data( element, key, value ) 注：element为js对象非jq对象；通过data()函数存取的数据都是临时数据，一旦页面刷新，之前存放的数据都将被移除。
+        $.data( element, key )取值
+
+
+        $.hasData()
+        --确定一个元素是否有相关的jQuery数据 可与$.data()联合使用
+        $.hasData( element ) element为js对象
+
+        $.sub()
+        --创建一个新的jQuery副本，其属性和方法可以修改，而不会影响原来的jQuery对象
+        var sub = jQuery.sub();
+        sub.fn.myCustomMethod = function(){
+        return 'just for me';
+        };
+        sub(document).ready(function() {
+        alert(sub('body').myCustomMethod());
+        });
+        alert(typeof jQuery('body').myCustomMethod); //underfine
+
+        $.speed
+        --创建一个包含一组属性的对象用来定义自定义动画
+        $.speed( [duration ] [, settings ] ) settings为PlainObject类型{easing: 'ease', complete: function () {}}
+        $.speed( [duration ] [, easing ] [, complete ] )
+        $.speed( settings )
+
+        $.htmlPrefilter()
+        --通过jQuery操作方法修改和过滤HTML字符串
+
+
+        $.readyException()
+    </pre>
+
+    <h4>jQuery回调对象</h4>
+    <pre>
+        $.Callbacks()
+        --一个多用途的回调列表对象，用来管理回调函数列表
+        function fn1( value ) {
+        alert( value );
+        }
+        function fn2( value ) {
+        fn1("fn2 says: " + value);
+        return false;
+        }
+        var callbacks = $.Callbacks();
+        callbacks.add( fn1 );
+        callbacks.add( fn2 );
+        callbacks.fire( "bar!" );
+
+        callbacks.add()
+        callbacks.disable()
+        callbacks.disabled()
+        callbacks.empty()
+        callbacks.fire()
+        callbacks.fired()
+        callbacks.firewith()
+        callbacks.has()
+        callbacks.lock()
+        callbacks.locked()
+        callbacks.remove()
+    </pre>
+
+    <h4>jQuery延迟对象</h4>
+    <pre>
+        $.Deferred()
+        --返回一个链式实用对象方法来注册多个回调
+        deferred.then(), deferred.always(), deferred.done()
+        例
+        // 当Deferred对象被解决时，3个函数被调用
+        function fn1() {
+        alert(1)
+        }
+        function fn2() {
+        alert(2)
+        }
+        function fn3( n ) {
+        alert(3)
+        }
+        //创建一个deferred对象
+        var dfd = $.Deferred();
+        dfd.done( [ fn1, fn2 ], fn3, [ fn2, fn1 ] ).done(function( n ) {
+        $( "p" ).append( n + " 已完成。" );
+        });
+
+        //或
+        var dfd = $.Deferred();
+        dfd.done( [ fn1, fn2 ], fn3, [ fn2, fn1 ] ).then(function( n ) {
+            $( "p" ).append( n + " 已完成。" );
+        }, function () {}).then();
+        
+        // 当按钮被点击时修改状态为已完成
+        $( "button" ).on( "click", function() {
+        dfd.resolve( "和" );
+        });
+
+
+        deferred.always()
+        deferred.done()
+        deferred.fail()
+        deferred.notify()
+        deferred.notifyWith()
+        deferred.pipe()
+        deferred.progress()
+        deferred.promise()
+        deferred.reject()
+        deferred.rejectWith()
+        deferred.resolve()
+        --解决Deferred（延迟）对象，并根据给定的参数调用任何 doneCallbacks 回调函数
+        
+        deferred.resolveWith()
+        deferred.state()
+        deferred.then()
+        .promise()
+    </pre>
+</body>
+
+</html>
